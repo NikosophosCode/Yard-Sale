@@ -4,7 +4,25 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>yard-sale-v2</title>
+    <title>Yard Sale - Your Marketplace for Pre-owned Items</title>
+    <script>
+      // Prevenir flash de tema incorrecto
+      (function() {
+        const theme = localStorage.getItem('yard-sale-theme');
+        const root = document.documentElement;
+        
+        // TailwindCSS solo reconoce la clase 'dark'
+        // Para light mode, simplemente no agregamos ninguna clase
+        if (theme === 'dark') {
+          root.classList.add('dark');
+        } else if (theme === 'system') {
+          // Verificar preferencia del sistema
+          if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            root.classList.add('dark');
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
