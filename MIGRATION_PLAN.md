@@ -1,0 +1,1518 @@
+# 📋 Plan de Migración: Yard Sale 2.0
+## De HTML/CSS Estático a React + Vite + TailwindCSS
+
+---
+
+## 📊 Análisis del Proyecto Actual
+
+### Estado Actual
+- **Stack Tecnológico**: HTML5 puro + CSS3 (variables CSS, Flexbox, Grid)
+- **Páginas**: 6 archivos HTML estáticos (index, login, create-account, edit-account, recovery, enviado)
+- **Funcionalidad**: 0% - Solo maquetación visual sin lógica
+- **Productos**: 2 productos repetidos (hardcodeados en HTML)
+- **Imágenes**: Placeholders de Pexels
+- **Responsive**: Sí (mobile-first con media queries)
+- **Accesibilidad**: Parcial (aria-labels solo en index.html)
+
+### Limitaciones Identificadas
+❌ Sin estado ni interactividad  
+❌ Sin carrito funcional  
+❌ Sin autenticación real  
+❌ Sin gestión de productos dinámica  
+❌ Sin persistencia de datos  
+❌ Sin API o backend  
+❌ Sin modo oscuro  
+❌ Sin animaciones  
+❌ Sin SEO optimizado  
+❌ Sin testing  
+
+---
+
+## 🎯 Objetivos de la Migración
+
+### Funcionales
+✅ **Carrito de compras funcional** con agregar/quitar/actualizar cantidades  
+✅ **Autenticación completa** (registro, login, recuperación, logout)  
+✅ **Gestión de usuarios** (perfil, edición de datos, persistencia)  
+✅ **Catálogo extenso** (mínimo 50+ productos reales con imágenes)  
+✅ **Búsqueda y filtrado** en tiempo real  
+✅ **Ordenamiento** por precio, nombre, fecha  
+✅ **Sistema de categorías** dinámico  
+✅ **Página de detalle** de producto  
+✅ **Checkout simulado** (sin pasarela de pago real)  
+✅ **Historial de órdenes** por usuario  
+
+### Técnicos
+✅ **Stack moderno**: React 18+ + Vite 5+ + TailwindCSS 3+  
+✅ **State Management**: Zustand o Context API + useReducer  
+✅ **Routing**: React Router v6  
+✅ **Animaciones**: Framer Motion  
+✅ **UI Components**: Headless UI + Custom components  
+✅ **Modo oscuro**: Con persistencia en localStorage  
+✅ **API Mock**: JSON Server o MSW (Mock Service Worker)  
+✅ **Forms**: React Hook Form + Zod para validación  
+✅ **TypeScript**: Opcional pero recomendado  
+✅ **Testing**: Vitest + React Testing Library  
+✅ **Linting**: ESLint + Prettier  
+✅ **Deployment**: Vercel/Netlify  
+
+---
+
+## 🏗️ Arquitectura Propuesta
+
+```
+yard-sale-v2/
+├── public/
+│   ├── favicon.ico
+│   └── assets/
+│       ├── icons/          # SVGs optimizados
+│       └── logos/          
+├── src/
+│   ├── api/                # Servicios API y mocks
+│   │   ├── mockData.js
+│   │   ├── products.js
+│   │   └── auth.js
+│   ├── assets/             # Assets procesados por Vite
+│   │   └── images/
+│   ├── components/         # Componentes reutilizables
+│   │   ├── common/
+│   │   │   ├── Button.jsx
+│   │   │   ├── Input.jsx
+│   │   │   ├── Card.jsx
+│   │   │   ├── Modal.jsx
+│   │   │   ├── Skeleton.jsx
+│   │   │   └── ThemeToggle.jsx
+│   │   ├── layout/
+│   │   │   ├── Header.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   └── MobileMenu.jsx
+│   │   ├── product/
+│   │   │   ├── ProductCard.jsx
+│   │   │   ├── ProductGrid.jsx
+│   │   │   ├── ProductDetail.jsx
+│   │   │   ├── ProductFilters.jsx
+│   │   │   └── ProductSearch.jsx
+│   │   ├── cart/
+│   │   │   ├── CartItem.jsx
+│   │   │   ├── CartSidebar.jsx
+│   │   │   ├── CartSummary.jsx
+│   │   │   └── CartEmpty.jsx
+│   │   └── auth/
+│   │       ├── LoginForm.jsx
+│   │       ├── RegisterForm.jsx
+│   │       ├── RecoveryForm.jsx
+│   │       └── ProtectedRoute.jsx
+│   ├── contexts/           # Context API providers
+│   │   ├── AuthContext.jsx
+│   │   ├── CartContext.jsx
+│   │   └── ThemeContext.jsx
+│   ├── hooks/              # Custom hooks
+│   │   ├── useAuth.js
+│   │   ├── useCart.js
+│   │   ├── useProducts.js
+│   │   ├── useLocalStorage.js
+│   │   ├── useDebounce.js
+│   │   └── useMediaQuery.js
+│   ├── pages/              # Páginas/Vistas
+│   │   ├── Home.jsx
+│   │   ├── ProductDetail.jsx
+│   │   ├── Cart.jsx
+│   │   ├── Checkout.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Recovery.jsx
+│   │   ├── Account.jsx
+│   │   ├── Orders.jsx
+│   │   └── NotFound.jsx
+│   ├── store/              # State management (Zustand)
+│   │   ├── authStore.js
+│   │   ├── cartStore.js
+│   │   └── productsStore.js
+│   ├── styles/             # Estilos globales
+│   │   ├── index.css
+│   │   └── animations.css
+│   ├── utils/              # Utilidades
+│   │   ├── formatters.js
+│   │   ├── validators.js
+│   │   ├── constants.js
+│   │   └── helpers.js
+│   ├── App.jsx             # Componente raíz
+│   ├── main.jsx            # Entry point
+│   └── router.jsx          # Configuración de rutas
+├── .env.example
+├── .eslintrc.cjs
+├── .gitignore
+├── index.html
+├── package.json
+├── postcss.config.js
+├── tailwind.config.js
+└── vite.config.js
+```
+
+---
+
+## 📦 Stack de Dependencias
+
+### Core
+```json
+{
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.22.0",
+    "zustand": "^4.5.0"
+  }
+}
+```
+
+### UI & Styling
+```json
+{
+  "dependencies": {
+    "tailwindcss": "^3.4.1",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.35",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
+    "framer-motion": "^11.0.3",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.2.1"
+  }
+}
+```
+
+### Forms & Validation
+```json
+{
+  "dependencies": {
+    "react-hook-form": "^7.50.1",
+    "zod": "^3.22.4",
+    "@hookform/resolvers": "^3.3.4"
+  }
+}
+```
+
+### API & Data
+```json
+{
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "msw": "^2.1.4"
+  }
+}
+```
+
+### Dev Tools
+```json
+{
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.1.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "vitest": "^1.2.2",
+    "@testing-library/react": "^14.2.1",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/user-event": "^14.5.2"
+  }
+}
+```
+
+---
+
+## 🎨 Sistema de Diseño con TailwindCSS
+
+### Configuración de Colores (tailwind.config.js)
+```javascript
+module.exports = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50: '#e7f5ea',
+          100: '#c4e6ca',
+          200: '#acd9b2',  // Color original
+          300: '#8dcd97',
+          400: '#6fc07d',
+          500: '#51b463',
+          600: '#3d974d',
+          700: '#2a7a37',
+          800: '#1c5d25',
+          900: '#0f4015',
+        },
+        neutral: {
+          50: '#ffffff',
+          100: '#f7f7f7',
+          200: '#ececec',
+          300: '#e6e6e6',
+          400: '#c7c7c7',
+          500: '#6d6d6d',
+          600: '#232830',
+          700: '#1a1f26',
+          800: '#12161b',
+          900: '#0a0c0f',
+        }
+      },
+      fontFamily: {
+        sans: ['Quicksand', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        'card': '28px',
+      },
+      boxShadow: {
+        'card': '0 12px 24px -8px rgba(0,0,0,.12), 0 4px 10px -4px rgba(0,0,0,.06)',
+        'card-soft': '0 8px 20px -6px rgba(0,0,0,.08), 0 2px 6px -2px rgba(0,0,0,.04)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.3s ease-in-out',
+        'slide-up': 'slideUp 0.3s ease-out',
+        'scale-in': 'scaleIn 0.2s ease-out',
+        'shake': 'shake 0.5s ease-in-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.9)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-5px)' },
+          '20%, 40%, 60%, 80%': { transform: 'translateX(5px)' },
+        },
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
+}
+```
+
+---
+
+## 🗄️ Modelo de Datos
+
+### Product Schema
+```javascript
+{
+  id: 'string | uuid',
+  title: 'string',
+  price: 'number',
+  description: 'string',
+  category: 'string', // 'clothes' | 'electronics' | 'furniture' | 'toys' | 'others'
+  images: ['string[]'], // URLs
+  thumbnail: 'string',
+  stock: 'number',
+  rating: 'number', // 0-5
+  reviews: 'number',
+  brand: 'string?',
+  condition: 'string', // 'new' | 'like-new' | 'good' | 'fair'
+  seller: {
+    id: 'string',
+    name: 'string',
+    avatar: 'string?'
+  },
+  createdAt: 'ISO Date',
+  updatedAt: 'ISO Date'
+}
+```
+
+### User Schema
+```javascript
+{
+  id: 'string | uuid',
+  name: 'string',
+  email: 'string',
+  password: 'string', // Hasheado (en prod usar bcrypt)
+  avatar: 'string?',
+  role: 'string', // 'user' | 'admin'
+  addresses: [{
+    id: 'string',
+    street: 'string',
+    city: 'string',
+    zipCode: 'string',
+    country: 'string',
+    isDefault: 'boolean'
+  }],
+  createdAt: 'ISO Date',
+  lastLogin: 'ISO Date'
+}
+```
+
+### Cart Schema (localStorage/Zustand)
+```javascript
+{
+  items: [{
+    productId: 'string',
+    quantity: 'number',
+    selectedAt: 'ISO Date'
+  }],
+  lastUpdated: 'ISO Date'
+}
+```
+
+### Order Schema
+```javascript
+{
+  id: 'string | uuid',
+  userId: 'string',
+  items: [{
+    product: 'Product Object',
+    quantity: 'number',
+    priceAtPurchase: 'number'
+  }],
+  subtotal: 'number',
+  tax: 'number',
+  shipping: 'number',
+  total: 'number',
+  status: 'string', // 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled'
+  shippingAddress: 'Address Object',
+  createdAt: 'ISO Date',
+  updatedAt: 'ISO Date'
+}
+```
+
+---
+
+## 🔌 API Mock con JSON Server
+
+### db.json (Estructura inicial)
+```json
+{
+  "products": [ /* 50+ productos */ ],
+  "users": [ /* Usuarios de prueba */ ],
+  "orders": [ /* Órdenes ejemplo */ ],
+  "categories": [
+    { "id": "all", "name": "All", "count": 52 },
+    { "id": "clothes", "name": "Clothes", "count": 12 },
+    { "id": "electronics", "name": "Electronics", "count": 15 },
+    { "id": "furniture", "name": "Furniture", "count": 10 },
+    { "id": "toys", "name": "Toys", "count": 8 },
+    { "id": "others", "name": "Others", "count": 7 }
+  ]
+}
+```
+
+### Scripts de package.json
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "json-server --watch db.json --port 3001",
+    "dev:all": "concurrently \"npm run dev\" \"npm run server\"",
+    "test": "vitest",
+    "lint": "eslint . --ext js,jsx",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\""
+  }
+}
+```
+
+---
+
+## 🛒 Funcionalidades del Carrito
+
+### Features
+1. **Agregar productos** desde ProductCard y ProductDetail
+2. **Actualizar cantidad** (incrementar/decrementar)
+3. **Eliminar items** individuales
+4. **Vaciar carrito** completo
+5. **Persistencia** en localStorage
+6. **Cálculo dinámico** de subtotal, impuestos, envío, total
+7. **Sincronización** entre pestañas (evento 'storage')
+8. **Indicador visual** en header (badge con cantidad)
+9. **Sidebar deslizante** con animación (Framer Motion)
+10. **Validación de stock** antes de agregar
+
+### Implementación con Zustand
+```javascript
+// src/store/cartStore.js
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+export const useCartStore = create(
+  persist(
+    (set, get) => ({
+      items: [],
+      
+      addItem: (product) => {
+        const { items } = get();
+        const existingItem = items.find(item => item.id === product.id);
+        
+        if (existingItem) {
+          set({
+            items: items.map(item =>
+              item.id === product.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            )
+          });
+        } else {
+          set({ items: [...items, { ...product, quantity: 1 }] });
+        }
+      },
+      
+      removeItem: (productId) => {
+        set({ items: get().items.filter(item => item.id !== productId) });
+      },
+      
+      updateQuantity: (productId, quantity) => {
+        if (quantity <= 0) {
+          get().removeItem(productId);
+          return;
+        }
+        set({
+          items: get().items.map(item =>
+            item.id === productId ? { ...item, quantity } : item
+          )
+        });
+      },
+      
+      clearCart: () => set({ items: [] }),
+      
+      getTotal: () => {
+        return get().items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      },
+      
+      getItemCount: () => {
+        return get().items.reduce((sum, item) => sum + item.quantity, 0);
+      }
+    }),
+    {
+      name: 'cart-storage',
+    }
+  )
+);
+```
+
+---
+
+## 🔐 Sistema de Autenticación
+
+### Features
+1. **Registro** con validación (email único, password strength)
+2. **Login** con credenciales
+3. **Recuperación** de contraseña (simulado con email)
+4. **Logout** con limpieza de sesión
+5. **Persistencia** de sesión en localStorage (JWT simulado)
+6. **Rutas protegidas** (ProtectedRoute component)
+7. **Redirección** post-login a página anterior
+8. **Estados de carga** y errores
+9. **Validación de formularios** con Zod
+
+### Implementación con Context API
+```javascript
+// src/contexts/AuthContext.jsx
+import { createContext, useContext, useState, useEffect } from 'react';
+
+const AuthContext = createContext();
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Restaurar sesión desde localStorage
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+    setLoading(false);
+  }, []);
+
+  const login = async (email, password) => {
+    try {
+      // Simular llamada API
+      const response = await fetch('http://localhost:3001/users');
+      const users = await response.json();
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (!user) {
+        throw new Error('Invalid credentials');
+      }
+      
+      const userData = { ...user, password: undefined };
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  };
+
+  const register = async (name, email, password) => {
+    try {
+      // Verificar email único
+      const response = await fetch(`http://localhost:3001/users?email=${email}`);
+      const existing = await response.json();
+      
+      if (existing.length > 0) {
+        throw new Error('Email already registered');
+      }
+      
+      // Crear usuario
+      const newUser = {
+        id: Date.now().toString(),
+        name,
+        email,
+        password, // En producción: hashear
+        role: 'user',
+        createdAt: new Date().toISOString()
+      };
+      
+      await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser)
+      });
+      
+      return login(email, password);
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export const useAuth = () => useContext(AuthContext);
+```
+
+---
+
+## 🎬 Animaciones con Framer Motion
+
+### Ejemplos de Implementación
+
+#### 1. Product Card Hover
+```jsx
+import { motion } from 'framer-motion';
+
+export function ProductCard({ product }) {
+  return (
+    <motion.article
+      whileHover={{ y: -8, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2 }}
+      className="product-card"
+    >
+      {/* contenido */}
+    </motion.article>
+  );
+}
+```
+
+#### 2. Cart Sidebar
+```jsx
+import { motion, AnimatePresence } from 'framer-motion';
+
+export function CartSidebar({ isOpen, onClose }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+          />
+          <motion.aside
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            className="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50"
+          >
+            {/* Cart content */}
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+```
+
+#### 3. Products Grid Stagger
+```jsx
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1
+  }
+};
+
+export function ProductGrid({ products }) {
+  return (
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="products-grid"
+    >
+      {products.map(product => (
+        <motion.div key={product.id} variants={itemVariants}>
+          <ProductCard product={product} />
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
+```
+
+---
+
+## 🌓 Modo Oscuro
+
+### Implementación con Context + TailwindCSS
+
+#### ThemeContext
+```javascript
+// src/contexts/ThemeContext.jsx
+import { createContext, useContext, useEffect, useState } from 'react';
+
+const ThemeContext = createContext();
+
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => useContext(ThemeContext);
+```
+
+#### Theme Toggle Component
+```jsx
+import { useTheme } from '../contexts/ThemeContext';
+import { motion } from 'framer-motion';
+
+export function ThemeToggle() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <motion.button
+      whileTap={{ scale: 0.9 }}
+      onClick={toggleTheme}
+      className="relative w-14 h-7 bg-neutral-300 dark:bg-neutral-600 rounded-full p-1 transition-colors"
+      aria-label="Toggle theme"
+    >
+      <motion.div
+        animate={{ x: theme === 'dark' ? 24 : 0 }}
+        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+        className="w-5 h-5 bg-white rounded-full shadow-md flex items-center justify-center"
+      >
+        {theme === 'dark' ? '🌙' : '☀️'}
+      </motion.div>
+    </motion.button>
+  );
+}
+```
+
+### Clases de Tailwind para Dark Mode
+```jsx
+<div className="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50">
+  <h1 className="text-2xl font-bold text-brand-600 dark:text-brand-400">
+    Yard Sale
+  </h1>
+  <p className="text-neutral-600 dark:text-neutral-400">
+    Find amazing second-hand items
+  </p>
+</div>
+```
+
+---
+
+## 📸 Catálogo de Productos Ampliado
+
+### Fuentes de Imágenes
+1. **Unsplash API** (gratis, alta calidad)
+2. **Pexels API** (actual, mantener)
+3. **Pixabay API** (alternativa)
+
+### Categorías y Cantidades
+- **Clothes** (15 productos): ropa, zapatos, accesorios
+- **Electronics** (18 productos): consolas, mandos, auriculares, tablets, smartwatches
+- **Furniture** (12 productos): sillas, mesas, lámparas, estanterías
+- **Toys** (10 productos): juguetes clásicos, peluches, juegos de mesa
+- **Others** (8 productos): libros, decoración, deportes
+
+### Script para Generar Mock Data
+```javascript
+// scripts/generateProducts.js
+const categories = ['clothes', 'electronics', 'furniture', 'toys', 'others'];
+const conditions = ['new', 'like-new', 'good', 'fair'];
+
+const electronicsProducts = [
+  {
+    title: 'Xbox Series Controller',
+    price: 59.99,
+    description: 'Wireless controller with textured grip and hybrid D-pad. Compatible with Xbox Series X|S, Xbox One, Windows 10/11, Android, and iOS.',
+    category: 'electronics',
+    images: [
+      'https://images.pexels.com/photos/14642112/pexels-photo-14642112.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/14642112/pexels-photo-14642112.jpeg?auto=compress&cs=tinysrgb&w=1200'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/14642112/pexels-photo-14642112.jpeg?auto=compress&cs=tinysrgb&w=400',
+    stock: 15,
+    rating: 4.7,
+    reviews: 324,
+    brand: 'Microsoft',
+    condition: 'new'
+  },
+  // ... 17 productos más
+];
+
+// Generar JSON completo
+```
+
+---
+
+## 🧪 Testing Strategy
+
+### Unit Tests (Vitest)
+```javascript
+// src/components/ProductCard.test.jsx
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { ProductCard } from './ProductCard';
+
+describe('ProductCard', () => {
+  const mockProduct = {
+    id: '1',
+    title: 'Test Product',
+    price: 99.99,
+    thumbnail: 'test.jpg',
+    rating: 4.5,
+    reviews: 10
+  };
+
+  it('renders product information', () => {
+    render(<ProductCard product={mockProduct} />);
+    expect(screen.getByText('Test Product')).toBeInTheDocument();
+    expect(screen.getByText('$99.99')).toBeInTheDocument();
+  });
+
+  it('calls onAddToCart when button clicked', () => {
+    const mockAddToCart = vi.fn();
+    render(<ProductCard product={mockProduct} onAddToCart={mockAddToCart} />);
+    
+    const addButton = screen.getByLabelText(/add to cart/i);
+    fireEvent.click(addButton);
+    
+    expect(mockAddToCart).toHaveBeenCalledWith(mockProduct);
+  });
+});
+```
+
+### Integration Tests
+```javascript
+// src/pages/Home.test.jsx
+import { describe, it, expect } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
+import { Home } from './Home';
+import { BrowserRouter } from 'react-router-dom';
+
+describe('Home Page', () => {
+  it('displays products after loading', async () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
+      expect(screen.getAllByRole('article')).toHaveLength(10); // Por página
+    });
+  });
+});
+```
+
+---
+
+## 🚀 Plan de Implementación Fase por Fase
+
+### **FASE 1: Setup Inicial** (1-2 días) ✅ COMPLETADA
+#### Estado: 100% Completado
+#### Fecha de Finalización: 21 de Octubre 2025
+
+#### Tareas Completadas ✅
+- [x] Crear proyecto con Vite + React + TypeScript
+  - Proyecto creado en: `yard-sale-v2/`
+  - Template usado: `react-ts`
+  - Vite v7.1.11, React 19.1.1, TypeScript 5.9.3
+- [x] Instalar dependencias core (17 packages)
+  - React Router DOM v7.9.4
+  - Zustand v5.0.8
+  - Framer Motion v12.23.24
+  - @headlessui/react v2.2.9
+  - @heroicons/react v2.2.0
+  - React Hook Form v7.65.0
+  - Zod v4.1.12
+  - @hookform/resolvers v5.2.2
+  - clsx v2.1.1
+  - tailwind-merge v3.3.1
+- [x] Instalar TailwindCSS v4 y dependencias
+  - TailwindCSS v4.1.15
+  - @tailwindcss/postcss v4.1.15
+  - PostCSS v8.5.6
+  - Autoprefixer v10.4.21
+  - @tailwindcss/forms v0.5.10
+  - @tailwindcss/aspect-ratio v0.4.2
+- [x] Configurar TailwindCSS con design tokens
+  - ✅ `tailwind.config.js` con colores personalizados (brand y neutral)
+  - ✅ Animaciones y keyframes personalizados
+  - ✅ `postcss.config.js` actualizado para TailwindCSS v4
+  - ✅ `src/index.css` con sintaxis de Tailwind v4 (`@import "tailwindcss"`)
+  - ✅ Fuente Quicksand de Google Fonts integrada
+- [x] Configurar ESLint + Prettier
+  - ✅ `.prettierrc` creado con plugin de Tailwind
+  - ✅ `.prettierignore` configurado
+  - ✅ `eslint.config.js` actualizado con soporte Prettier
+  - ✅ Instalado `prettier` v3.6.2 y `eslint-config-prettier` v10.1.8
+  - ✅ Instalado `prettier-plugin-tailwindcss` v0.7.1
+- [x] Crear estructura de carpetas completa
+  - ✅ `/src/api` - Servicios de API
+  - ✅ `/src/components/common` - Componentes reutilizables
+  - ✅ `/src/components/layout` - Layout components
+  - ✅ `/src/components/product` - Componentes de productos
+  - ✅ `/src/components/cart` - Componentes del carrito
+  - ✅ `/src/components/auth` - Componentes de autenticación
+  - ✅ `/src/contexts` - Context API providers
+  - ✅ `/src/hooks` - Custom hooks
+  - ✅ `/src/pages` - Páginas/Vistas
+  - ✅ `/src/store` - Zustand stores
+  - ✅ `/src/types` - TypeScript types
+  - ✅ `/src/utils` - Utilidades
+  - ✅ `/src/test` - Testing setup
+  - ✅ `/public/assets/icons` - Iconos SVG
+  - ✅ `/public/assets/logos` - Logos de la marca
+- [x] Migrar assets (icons, logos)
+  - ✅ Copiado desde `legacy-proyect/assets/` a `public/assets/`
+- [x] Setup JSON Server con db.json inicial
+  - ✅ Instalado `json-server` v1.0.0-beta.3
+  - ✅ Instalado `concurrently` v9.2.1
+  - ✅ `db.json` creado con 6 productos, 2 usuarios, categorías
+  - ✅ Scripts configurados en `package.json`
+- [x] Configurar Vitest + Testing Library
+  - ✅ Instalado `vitest` v3.2.4
+  - ✅ Instalado `@testing-library/react` v16.3.0
+  - ✅ Instalado `@testing-library/jest-dom` v6.9.1
+  - ✅ Instalado `@testing-library/user-event` v14.6.1
+  - ✅ Instalado `jsdom` v27.0.1
+  - ✅ `vitest.config.ts` creado con path aliases
+  - ✅ `src/test/setup.ts` creado con matchers
+- [x] Actualizar configuraciones de TypeScript
+  - ✅ Path aliases configurados en `tsconfig.app.json`
+  - ✅ 9 aliases disponibles: `@/`, `@components/`, `@hooks/`, etc.
+  - ✅ Types de testing agregados
+- [x] Configurar Vite con path aliases
+  - ✅ `vite.config.ts` actualizado con 9 aliases
+- [x] Crear archivos base del proyecto
+  - ✅ `src/types/index.ts` - Interfaces TypeScript completas
+  - ✅ `src/utils/constants.ts` - Constantes de la aplicación
+  - ✅ `src/utils/formatters.ts` - Funciones de formateo
+  - ✅ `src/utils/helpers.ts` - Utilidades generales (cn, debounce, etc.)
+  - ✅ `src/hooks/useLocalStorage.ts` - Hook con sincronización
+  - ✅ `src/hooks/useDebounce.ts` - Hook de debounce
+  - ✅ `src/hooks/useMediaQuery.ts` - Hook de media queries
+  - ✅ `.env.example` - Variables de entorno
+- [x] Actualizar scripts de npm
+  - ✅ `dev:all` - Desarrollo con frontend + backend
+  - ✅ `server` - Solo JSON Server
+  - ✅ `test` y `test:ui` - Testing con Vitest
+  - ✅ `format` y `format:check` - Formateo con Prettier
+- [x] Verificación final
+  - ✅ Servidor de desarrollo funcionando
+  - ✅ Sin errores de compilación
+  - ✅ Prettier y ESLint funcionando correctamente
+  - ✅ README.md actualizado con documentación completa
+
+#### Comandos Ejecutados ✅
+```bash
+# 1. Crear proyecto
+npm create vite@latest yard-sale-v2 -- --template react-ts
+cd yard-sale-v2
+
+# 2. Instalar dependencias base
+npm install
+
+# 3. Instalar dependencias de UI y estado
+npm install react-router-dom zustand framer-motion
+npm install @headlessui/react @heroicons/react
+npm install clsx tailwind-merge
+
+# 4. Instalar dependencias de formularios
+npm install react-hook-form zod @hookform/resolvers
+
+# 5. Instalar TailwindCSS v4
+npm install -D tailwindcss postcss autoprefixer
+npm install -D @tailwindcss/forms @tailwindcss/aspect-ratio
+npm install -D @tailwindcss/postcss
+
+# 6. Configurar Prettier y ESLint
+npm install -D prettier eslint-config-prettier prettier-plugin-tailwindcss
+
+# 7. Instalar JSON Server y utilidades
+npm install -D json-server concurrently
+
+# 8. Instalar dependencias de testing
+npm install -D vitest @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom
+
+# 9. Instalar @types/node para path aliases
+npm install -D @types/node
+```
+
+#### Archivos Configurados ✅
+```
+✅ tailwind.config.js - Design tokens completos
+✅ postcss.config.js - Plugin de TailwindCSS v4
+✅ src/index.css - Sintaxis Tailwind v4 + Quicksand
+✅ .prettierrc - Configuración con plugin
+✅ .prettierignore - Archivos a ignorar
+✅ eslint.config.js - Integración con Prettier
+✅ vite.config.ts - Path aliases
+✅ vitest.config.ts - Testing setup
+✅ tsconfig.app.json - Path aliases + types
+✅ package.json - Scripts actualizados
+✅ db.json - Base de datos mock
+✅ .env.example - Variables de entorno
+```
+
+#### Estadísticas del Setup 📊
+- **Total de paquetes**: 40+ packages
+- **Dependencies**: 11 packages
+- **DevDependencies**: 29+ packages
+- **Tamaño node_modules**: ~400 MB
+- **Archivos TypeScript**: 11 archivos base creados
+- **Estructura de carpetas**: 14 directorios creados
+- **Tiempo de setup**: ~2 horas
+
+#### Notas Técnicas Importantes 📝
+- ✅ **TailwindCSS v4**: Requiere `@tailwindcss/postcss` y sintaxis `@import "tailwindcss"`
+- ✅ **TypeScript**: Configurado con strict mode y path aliases
+- ✅ **Testing**: Vitest configurado con jsdom y Testing Library
+- ✅ **Code Quality**: ESLint + Prettier sin conflictos
+- ✅ **Path Aliases**: 9 aliases configurados (`@/`, `@components/`, etc.)
+- ✅ **Dark Mode**: Estrategia `class` de TailwindCSS
+- ✅ **Fonts**: Quicksand de Google Fonts
+- ✅ **Icons**: Heroicons v2 + SVGs custom migrados
+
+---
+
+### **FASE 2: Componentes Base** (2-3 días)
+#### Tareas
+- [ ] Crear componentes common (Button, Input, Card, Modal)
+- [ ] Implementar Header con navegación
+- [ ] Implementar Footer
+- [ ] Crear ThemeContext y ThemeToggle
+- [ ] Implementar modo oscuro en todos los componentes
+- [ ] Crear Skeleton loaders
+- [ ] Diseñar sistema de iconos
+- [ ] Testing unitario de componentes
+
+#### Prioridad: Button Component
+```jsx
+// src/components/common/Button.jsx
+import { motion } from 'framer-motion';
+import { clsx } from 'clsx';
+
+export function Button({
+  children,
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  disabled = false,
+  icon,
+  iconPosition = 'left',
+  className,
+  ...props
+}) {
+  const baseStyles = 'font-bold rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-offset-2';
+  
+  const variants = {
+    primary: 'bg-brand-500 hover:bg-brand-600 text-white focus:ring-brand-400',
+    secondary: 'bg-neutral-100 hover:bg-neutral-200 text-neutral-900 focus:ring-neutral-300',
+    outline: 'border-2 border-brand-500 text-brand-500 hover:bg-brand-50',
+    ghost: 'hover:bg-neutral-100 text-neutral-700',
+    danger: 'bg-red-500 hover:bg-red-600 text-white'
+  };
+  
+  const sizes = {
+    sm: 'px-4 py-2 text-sm',
+    md: 'px-6 py-3 text-base',
+    lg: 'px-8 py-4 text-lg'
+  };
+
+  return (
+    <motion.button
+      whileTap={{ scale: 0.95 }}
+      disabled={disabled || loading}
+      className={clsx(
+        baseStyles,
+        variants[variant],
+        sizes[size],
+        (disabled || loading) && 'opacity-50 cursor-not-allowed',
+        className
+      )}
+      {...props}
+    >
+      {loading ? (
+        <span>Loading...</span>
+      ) : (
+        <>
+          {icon && iconPosition === 'left' && <span className="mr-2">{icon}</span>}
+          {children}
+          {icon && iconPosition === 'right' && <span className="ml-2">{icon}</span>}
+        </>
+      )}
+    </motion.button>
+  );
+}
+```
+
+---
+
+### **FASE 3: Autenticación** (2-3 días)
+#### Tareas
+- [ ] Crear AuthContext con login/register/logout
+- [ ] Diseñar formularios de login y registro con React Hook Form
+- [ ] Implementar validaciones con Zod
+- [ ] Crear página de Login
+- [ ] Crear página de Register
+- [ ] Crear página de Recovery
+- [ ] Implementar ProtectedRoute
+- [ ] Persistencia de sesión en localStorage
+- [ ] Mensajes de error/éxito con toast notifications
+- [ ] Testing de flujos de autenticación
+
+#### Zod Schema Ejemplo
+```javascript
+// src/utils/schemas.js
+import { z } from 'zod';
+
+export const loginSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters')
+});
+
+export const registerSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  password: z.string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .regex(/[0-9]/, 'Password must contain at least one number'),
+  confirmPassword: z.string()
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ['confirmPassword']
+});
+```
+
+---
+
+### **FASE 4: Catálogo de Productos** (3-4 días)
+#### Tareas
+- [ ] Crear/popular db.json con 50+ productos
+- [ ] Implementar ProductCard component
+- [ ] Implementar ProductGrid con animaciones stagger
+- [ ] Crear ProductDetail page
+- [ ] Implementar búsqueda en tiempo real (debounced)
+- [ ] Implementar filtros por categoría
+- [ ] Implementar ordenamiento (precio, nombre, fecha)
+- [ ] Crear ProductFilters component
+- [ ] Implementar paginación o infinite scroll
+- [ ] Crear Skeleton states para loading
+- [ ] Optimizar imágenes (lazy loading)
+- [ ] Testing de componentes de productos
+
+#### useProducts Hook
+```javascript
+// src/hooks/useProducts.js
+import { useState, useEffect } from 'react';
+import { useDebounce } from './useDebounce';
+
+export function useProducts(initialFilters = {}) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filters, setFilters] = useState({
+    search: '',
+    category: 'all',
+    sortBy: 'recent',
+    ...initialFilters
+  });
+
+  const debouncedSearch = useDebounce(filters.search, 300);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        let url = 'http://localhost:3001/products?';
+        
+        if (filters.category !== 'all') {
+          url += `category=${filters.category}&`;
+        }
+        
+        if (debouncedSearch) {
+          url += `q=${debouncedSearch}&`;
+        }
+        
+        const sortParams = {
+          'recent': '_sort=createdAt&_order=desc',
+          'price-asc': '_sort=price&_order=asc',
+          'price-desc': '_sort=price&_order=desc',
+          'name': '_sort=title&_order=asc'
+        };
+        url += sortParams[filters.sortBy];
+
+        const response = await fetch(url);
+        const data = await response.json();
+        setProducts(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [filters.category, filters.sortBy, debouncedSearch]);
+
+  return { products, loading, error, filters, setFilters };
+}
+```
+
+---
+
+### **FASE 5: Carrito de Compras** (2-3 días)
+#### Tareas
+- [ ] Crear cartStore con Zustand
+- [ ] Implementar CartItem component
+- [ ] Implementar CartSidebar con animación slide
+- [ ] Crear CartEmpty state
+- [ ] Implementar CartSummary con cálculos
+- [ ] Agregar badge de cantidad en header
+- [ ] Persistencia en localStorage
+- [ ] Sincronización entre pestañas
+- [ ] Validación de stock
+- [ ] Animaciones de agregar/quitar items
+- [ ] Testing del store y componentes
+
+---
+
+### **FASE 6: Checkout y Órdenes** (2-3 días)
+#### Tareas
+- [ ] Crear página de Checkout
+- [ ] Formulario de dirección de envío
+- [ ] Resumen de orden
+- [ ] Simulación de pago
+- [ ] Crear orden en db.json
+- [ ] Página de confirmación
+- [ ] Página de Orders (historial)
+- [ ] OrderCard component
+- [ ] Testing de flujo completo
+
+---
+
+### **FASE 7: Cuenta de Usuario** (1-2 días)
+#### Tareas
+- [ ] Página de Account (perfil)
+- [ ] Edición de datos personales
+- [ ] Gestión de direcciones
+- [ ] Cambio de contraseña
+- [ ] Avatar upload (simulado con URL)
+- [ ] Testing
+
+---
+
+### **FASE 8: Mejoras Finales** (2-3 días)
+#### Tareas
+- [ ] Implementar toast notifications
+- [ ] Agregar breadcrumbs
+- [ ] Crear página 404
+- [ ] Mejorar accesibilidad (focus states, aria-labels)
+- [ ] Optimizar performance (React.memo, lazy loading)
+- [ ] SEO básico (meta tags, og:image)
+- [ ] Lighthouse audit (>90 score)
+- [ ] Cross-browser testing
+- [ ] Mobile UX polish
+
+---
+
+### **FASE 9: Testing y Documentación** (1-2 días)
+#### Tareas
+- [ ] Completar tests unitarios (>80% coverage)
+- [ ] Tests de integración críticos
+- [ ] E2E tests con Playwright (opcional)
+- [ ] Documentación de componentes (Storybook opcional)
+- [ ] README.md actualizado
+- [ ] Documentación de API mock
+- [ ] Guía de contribución
+
+---
+
+### **FASE 10: Deployment** (1 día)
+#### Tareas
+- [ ] Build de producción
+- [ ] Configurar variables de entorno
+- [ ] Deploy a Vercel/Netlify
+- [ ] Configurar dominio custom (opcional)
+- [ ] Setup CI/CD (GitHub Actions)
+- [ ] Monitoring y analytics (opcional)
+
+---
+
+## 📊 Estimación de Tiempo Total
+
+| Fase | Duración Estimada | Dificultad |
+|------|-------------------|------------|
+| 1. Setup | 1-2 días | Baja |
+| 2. Componentes Base | 2-3 días | Media |
+| 3. Autenticación | 2-3 días | Media-Alta |
+| 4. Catálogo | 3-4 días | Media |
+| 5. Carrito | 2-3 días | Media |
+| 6. Checkout | 2-3 días | Media-Alta |
+| 7. Cuenta Usuario | 1-2 días | Baja-Media |
+| 8. Mejoras Finales | 2-3 días | Media |
+| 9. Testing | 1-2 días | Media |
+| 10. Deployment | 1 día | Baja |
+| **TOTAL** | **17-26 días** | Variable |
+
+**Nota**: Tiempos para desarrollador con experiencia media trabajando full-time. Ajustar según disponibilidad.
+
+---
+
+## ⚠️ Riesgos y Mitigaciones
+
+### Riesgos Técnicos
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|--------|--------------|---------|------------|
+| Scope creep | Alta | Alto | Priorizar MVP, features adicionales en v2 |
+| Performance issues | Media | Medio | Code splitting, lazy loading desde el inicio |
+| State management complexity | Media | Medio | Usar Zustand (más simple que Redux) |
+| Mock API limitaciones | Baja | Bajo | Documentar limitaciones, migrar a backend real en futuro |
+
+### Riesgos de Proyecto
+| Riesgo | Probabilidad | Impacto | Mitigación |
+|--------|--------------|---------|------------|
+| Retrasos en desarrollo | Media | Medio | Buffer de tiempo en estimaciones (20-30%) |
+| Cambios de requisitos | Media | Alto | Definir scope claro, priorizar features |
+| Falta de testing | Alta | Alto | TDD desde el inicio, mínimo 70% coverage |
+
+---
+
+## 🎯 Features Futuras (Post-MVP)
+
+### V2.0 (Corto Plazo)
+- [ ] Wishlist/Favoritos
+- [ ] Comparador de productos
+- [ ] Reviews y ratings de usuarios
+- [ ] Chat entre comprador-vendedor
+- [ ] Notificaciones push (web)
+- [ ] Share social (WhatsApp, Twitter)
+- [ ] Descuentos y cupones
+- [ ] Multi-idioma (i18n)
+
+### V3.0 (Largo Plazo)
+- [ ] Backend real (Node.js + Express + MongoDB/PostgreSQL)
+- [ ] Pasarela de pago real (Stripe/PayPal)
+- [ ] Upload de imágenes real (Cloudinary)
+- [ ] Email transaccional (SendGrid)
+- [ ] Admin panel
+- [ ] Analytics dashboard
+- [ ] PWA (Progressive Web App)
+- [ ] Mobile app (React Native)
+
+---
+
+## 📚 Recursos y Referencias
+
+### Tutoriales y Docs
+- [Vite Documentation](https://vitejs.dev/)
+- [React Router v6 Guide](https://reactrouter.com/)
+- [TailwindCSS Docs](https://tailwindcss.com/)
+- [Framer Motion Examples](https://www.framer.com/motion/)
+- [Zustand Guide](https://docs.pmnd.rs/zustand/getting-started/introduction)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod Validation](https://zod.dev/)
+
+### Design Inspiration
+- [Dribbble - E-commerce](https://dribbble.com/tags/ecommerce)
+- [Awwwards - Shop](https://www.awwwards.com/websites/shop/)
+- [Mobbin - Shopping Apps](https://mobbin.com/)
+
+### APIs de Imágenes
+- [Unsplash API](https://unsplash.com/developers)
+- [Pexels API](https://www.pexels.com/api/)
+- [Fake Store API](https://fakestoreapi.com/) (alternativa a JSON Server)
+
+---
+
+## 🎉 Conclusión
+
+Este plan de migración transforma **Yard Sale** de un proyecto estático educativo a una **e-commerce moderna y funcional** con:
+
+✅ **Stack moderno**: React + Vite + TailwindCSS  
+✅ **50+ productos** con imágenes reales  
+✅ **Carrito funcional** con persistencia  
+✅ **Autenticación completa**  
+✅ **Modo oscuro**  
+✅ **Animaciones fluidas**  
+✅ **Responsive design**  
+✅ **Testing incluido**  
+✅ **Listo para producción**  
+
+### Próximos Pasos Inmediatos
+1. ✅ Revisar y aprobar este plan
+2. ⏭️ Comenzar FASE 1: Setup inicial
+3. ⏭️ Crear repositorio Git nuevo
+4. ⏭️ Configurar entorno de desarrollo
+5. ⏭️ Ejecutar comandos de instalación
+
+**Tiempo estimado total: 17-26 días laborables**
+
+¿Listo para comenzar? 🚀
+
+---
+
+## 📝 Changelog del Plan
+- **v1.0** (2025-10-21 - 14:00): Plan inicial completo
+- **v1.1** (2025-10-21 - 16:30): FASE 1 iniciada - Setup básico al 60%
+  - ✅ Proyecto Vite + React + TypeScript creado
+  - ✅ 17 dependencias instaladas (core, UI, forms, styling)
+  - ⏳ Pendiente: Configuraciones, estructura de carpetas, assets, testing
+- **v2.0** (2025-10-21 - 21:30): ✅ FASE 1 COMPLETADA AL 100%
+  - ✅ TailwindCSS v4 configurado con design tokens
+  - ✅ ESLint + Prettier configurados
+  - ✅ Estructura completa de 14 carpetas creada
+  - ✅ Assets migrados desde proyecto legacy
+  - ✅ JSON Server configurado con db.json
+  - ✅ Vitest + Testing Library configurados
+  - ✅ Path aliases (9 aliases en Vite y TypeScript)
+  - ✅ 11 archivos base TypeScript creados
+  - ✅ Scripts npm actualizados (dev:all, test, format)
+  - ✅ Servidor de desarrollo funcionando sin errores
+  - ✅ README.md completamente actualizado
+  - ✅ NEXT_STEPS.md actualizado con FASE 2
+  - 📦 Total: 40+ packages instalados
+  - 🎉 **Proyecto listo para FASE 2: Componentes Base**
+
+---
+
+## 📊 Progreso General del Proyecto
+
+### Resumen de Fases
+
+| Fase | Estado | Progreso | Última Actualización |
+|------|--------|----------|---------------------|
+| **1. Setup Inicial** | ✅ Completada | 100% | 21/10/2025 21:30 |
+| 2. Componentes Base | ⏭️ Siguiente | 0% | - |
+| 3. Autenticación | ⚪ Pendiente | 0% | - |
+| 4. Catálogo | ⚪ Pendiente | 0% | - |
+| 5. Carrito | ⚪ Pendiente | 0% | - |
+| 6. Checkout | ⚪ Pendiente | 0% | - |
+| 7. Cuenta Usuario | ⚪ Pendiente | 0% | - |
+| 8. Mejoras Finales | ⚪ Pendiente | 0% | - |
+| 9. Testing | ⚪ Pendiente | 0% | - |
+| 10. Deployment | ⚪ Pendiente | 0% | - |
+
+**Progreso Total: 10% (1/10 fases completadas)**
+
+### Información del Proyecto
+
+```
+📁 Ubicación: C:\Users\nicon\OneDrive\Documents\Proyectos\yard-sale-v2\
+🛠️ Stack: React 19.1.1 + Vite 7.1.11 + TypeScript 5.9.3
+📦 Dependencias: 40+ packages instalados
+🎨 UI: TailwindCSS 4.1.15 + Headless UI 2.2.9 + Heroicons 2.2.0
+🔄 Estado: Zustand 5.0.8
+🎭 Animaciones: Framer Motion 12.23.24
+🧭 Routing: React Router v7.9.4
+📋 Forms: React Hook Form 7.65.0 + Zod 4.1.12
+🧪 Testing: Vitest 3.2.4 + Testing Library 16.3.0
+🎨 Linting: ESLint 9.36.0 + Prettier 3.6.2
+📡 API Mock: JSON Server 1.0.0-beta.3
+```
+
+### Próximos Pasos (FASE 2)
+
+Ver archivo `NEXT_STEPS.md` para detalles completos de la FASE 2: Componentes Base.
+
+#### Prioridades Inmediatas:
+1. 🔘 Button component (variantes, tamaños, loading, iconos)
+2. 📝 Input component (validación, tipos, error states)
+3. 🃏 Card component (variantes, hover effects)
+4. 🪟 Modal component (animaciones, accesibilidad)
+5. 🎯 Header component (navegación, carrito, tema)
+6. 🌓 ThemeContext + ThemeToggle (modo oscuro)
+
+---
+
+*Generado el 21 de Octubre de 2025 por GitHub Copilot para el proyecto Yard Sale V2*  
+*Última actualización: 21/10/2025 21:30 - ✅ FASE 1 COMPLETADA (100%)*  
+*Siguiente fase: FASE 2 - Componentes Base (Ver NEXT_STEPS.md)*
