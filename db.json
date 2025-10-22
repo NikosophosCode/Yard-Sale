@@ -1,0 +1,139 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Retro Bike",
+      "price": 120.00,
+      "description": "Vintage style bicycle in excellent condition. Perfect for city rides.",
+      "category": "others",
+      "condition": "like-new",
+      "image": "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "images": [
+        "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "stock": 3,
+      "featured": true,
+      "sellerId": "1",
+      "createdAt": "2025-10-01T00:00:00.000Z",
+      "updatedAt": "2025-10-01T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Modern Armchair",
+      "price": 85.00,
+      "description": "Comfortable modern armchair with wooden legs. Great condition.",
+      "category": "furniture",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/245208/pexels-photo-245208.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "images": [
+        "https://images.pexels.com/photos/245208/pexels-photo-245208.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "stock": 2,
+      "featured": true,
+      "sellerId": "2",
+      "createdAt": "2025-10-02T00:00:00.000Z",
+      "updatedAt": "2025-10-02T00:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "name": "Gaming Console",
+      "price": 250.00,
+      "description": "Latest generation gaming console with two controllers included.",
+      "category": "electronics",
+      "condition": "new",
+      "image": "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "images": [
+        "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "stock": 5,
+      "featured": true,
+      "sellerId": "1",
+      "createdAt": "2025-10-03T00:00:00.000Z",
+      "updatedAt": "2025-10-03T00:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "name": "Designer Sneakers",
+      "price": 65.00,
+      "description": "Limited edition designer sneakers. Size 42. Barely worn.",
+      "category": "clothes",
+      "condition": "like-new",
+      "image": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "images": [
+        "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "stock": 1,
+      "featured": false,
+      "sellerId": "3",
+      "createdAt": "2025-10-04T00:00:00.000Z",
+      "updatedAt": "2025-10-04T00:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "name": "Vintage Camera",
+      "price": 180.00,
+      "description": "Classic film camera from the 1980s. Fully functional with leather case.",
+      "category": "electronics",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "images": [
+        "https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "stock": 2,
+      "featured": true,
+      "sellerId": "2",
+      "createdAt": "2025-10-05T00:00:00.000Z",
+      "updatedAt": "2025-10-05T00:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "name": "Wooden Bookshelf",
+      "price": 95.00,
+      "description": "Solid oak bookshelf with 5 shelves. Minor wear, very sturdy.",
+      "category": "furniture",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "images": [
+        "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      ],
+      "stock": 1,
+      "featured": false,
+      "sellerId": "1",
+      "createdAt": "2025-10-06T00:00:00.000Z",
+      "updatedAt": "2025-10-06T00:00:00.000Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Demo User",
+      "email": "demo@yardsale.com",
+      "password": "demo123",
+      "role": "user",
+      "avatar": null,
+      "addresses": [],
+      "createdAt": "2025-10-01T00:00:00.000Z",
+      "lastLogin": "2025-10-21T00:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Admin User",
+      "email": "admin@yardsale.com",
+      "password": "admin123",
+      "role": "admin",
+      "avatar": null,
+      "addresses": [],
+      "createdAt": "2025-10-01T00:00:00.000Z",
+      "lastLogin": "2025-10-21T00:00:00.000Z"
+    }
+  ],
+  "orders": [],
+  "categories": [
+    { "id": "all", "name": "All", "count": 6 },
+    { "id": "clothes", "name": "Clothes", "count": 1 },
+    { "id": "electronics", "name": "Electronics", "count": 2 },
+    { "id": "furniture", "name": "Furniture", "count": 2 },
+    { "id": "toys", "name": "Toys", "count": 0 },
+    { "id": "others", "name": "Others", "count": 1 }
+  ]
+}
