@@ -4,7 +4,7 @@
 
 **Fecha**: 21 de Octubre 2025  
 **Progreso FASE 1**: ✅ 100% COMPLETADO  
-**Progreso FASE 2**: 0% - Por iniciar  
+**Progreso FASE 2**: ✅ 90% COMPLETADO (tests pendientes)  
 **Ubicación del proyecto**: `C:\Users\nicon\OneDrive\Documents\Proyectos\yard-sale-v2\`
 
 ## ✅ FASE 1 - Completada al 100%
@@ -44,140 +44,370 @@
 
 ---
 
-## 🎯 FASE 2: Componentes Base (Por Iniciar)
+## 🎯 FASE 2: Componentes Base ✅ 90% COMPLETADA
 
-### Objetivo
-Crear los componentes básicos reutilizables que servirán como fundación para toda la aplicación.
+### ✅ Componentes Implementados
 
-### Duración Estimada: 2-3 días
-
-### Tareas Pendientes
-
-#### 1. Componente Button 🔘
-**Prioridad**: Alta  
+#### 1. Button Component ✅
 **Ubicación**: `src/components/common/Button.tsx`
 
-Características:
-- Variantes: primary, secondary, outline, ghost, danger
-- Tamaños: sm, md, lg
-- Estados: loading, disabled
-- Soporte para iconos (left/right)
-- Animación con Framer Motion
-- TypeScript con props tipados
+**Características implementadas**:
+- ✅ 5 variantes: primary, secondary, outline, ghost, danger
+- ✅ 3 tamaños: sm, md, lg
+- ✅ Estado de loading con spinner animado
+- ✅ Estado disabled
+- ✅ Soporte para iconos izquierda/derecha
+- ✅ Animaciones con Framer Motion (hover, tap)
+- ✅ Modo oscuro completo
+- ✅ TypeScript con props tipados
+- ✅ forwardRef para ref forwarding
+- ✅ Ancho completo opcional
 
+**Ejemplo de uso**:
 ```tsx
-// Ejemplo de uso
-<Button variant="primary" size="md" loading={false}>
+<Button variant="primary" size="md" loading={false} leftIcon={<CartIcon />}>
   Add to Cart
 </Button>
 ```
 
-#### 2. Componente Input 📝
-**Prioridad**: Alta  
+---
+
+#### 2. Input Component ✅
 **Ubicación**: `src/components/common/Input.tsx`
 
-Características:
-- Tipos: text, email, password, number, search
-- Estados de validación (error, success)
-- Placeholder y label
-- Iconos opcionales
-- Integración con React Hook Form
-- Modo oscuro
+**Características implementadas**:
+- ✅ Tipos: text, email, password, number, search, tel, url
+- ✅ Estados de validación (error con mensaje, success)
+- ✅ Label con asterisco para required
+- ✅ Helper text
+- ✅ Iconos izquierda/derecha
+- ✅ Toggle de visibilidad para password (con iconos)
+- ✅ Modo oscuro
+- ✅ Accesibilidad (aria-invalid, aria-describedby)
+- ✅ Integración con React Hook Form (forwardRef)
 
-#### 3. Componente Card 🃏
-**Prioridad**: Alta  
-**Ubicación**: `src/components/common/Card.tsx`
-
-Características:
-- Variantes: default, elevated, outlined
-- Hover effects
-- Click handler opcional
-- Soporte para header/body/footer
-- Responsive
-
-#### 4. Componente Modal 🪟
-**Prioridad**: Media  
-**Ubicación**: `src/components/common/Modal.tsx`
-
-Características:
-- Backdrop con blur
-- Animación de entrada/salida (Framer Motion)
-- Cerrar con ESC o click fuera
-- Tamaños: sm, md, lg, xl, full
-- Accesible (focus trap, aria-labels)
-
-#### 5. Header Component 🎯
-**Prioridad**: Alta  
-**Ubicación**: `src/components/layout/Header.tsx`
-
-Características:
-- Logo de Yard Sale
-- Navegación principal
-- Buscador
-- Carrito (con badge de cantidad)
-- Avatar de usuario / Login
-- Theme toggle
-- Menú móvil responsive
-
-#### 6. Footer Component 👣
-**Prioridad**: Baja  
-**Ubicación**: `src/components/layout/Footer.tsx`
-
-Características:
-- Links útiles
-- Redes sociales
-- Copyright
-- Responsive
-
-#### 7. ThemeContext & ThemeToggle 🌓
-**Prioridad**: Alta  
-**Ubicación**: 
-- `src/contexts/ThemeContext.tsx`
-- `src/components/common/ThemeToggle.tsx`
-
-Características:
-- Context API para tema global
-- Persistencia en localStorage
-- Animación de toggle
-- Soporte para sistema (auto)
-
-#### 8. Skeleton Loaders 💀
-**Prioridad**: Media  
-**Ubicación**: `src/components/common/Skeleton.tsx`
-
-Características:
-- Variantes: text, circle, rectangle, card
-- Animación de shimmer
-- Composable
-
-#### 9. Testing de Componentes ✅
-**Prioridad**: Media  
-
-Tests a crear:
-- `Button.test.tsx` - Renderizado, clicks, variantes
-- `Input.test.tsx` - Validación, cambios
-- `Card.test.tsx` - Renderizado
-- `Modal.test.tsx` - Apertura/cierre, ESC key
-- `ThemeToggle.test.tsx` - Cambio de tema
+**Ejemplo de uso**:
+```tsx
+<Input
+  type="email"
+  label="Email"
+  placeholder="john@example.com"
+  error={errors.email?.message}
+  required
+/>
+```
 
 ---
 
-## 📋 Checklist FASE 2
+#### 3. Card Component ✅
+**Ubicación**: `src/components/common/Card.tsx`
+
+**Características implementadas**:
+- ✅ 3 variantes: default, elevated, outlined
+- ✅ Hover effect con animación
+- ✅ Clickeable con Framer Motion
+- ✅ 4 niveles de padding: none, sm, md, lg
+- ✅ Sub-componentes: CardHeader, CardBody, CardFooter
+- ✅ Modo oscuro
+- ✅ Composable y flexible
+
+**Ejemplo de uso**:
+```tsx
+<Card variant="elevated" hoverEffect clickable>
+  <CardHeader>Title</CardHeader>
+  <CardBody>Content here...</CardBody>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+</Card>
+```
+
+---
+
+#### 4. Modal Component ✅
+**Ubicación**: `src/components/common/Modal.tsx`
+
+**Características implementadas**:
+- ✅ Animaciones suaves con Framer Motion
+- ✅ Backdrop con blur
+- ✅ Cerrar con ESC, click fuera o botón X
+- ✅ 5 tamaños: sm, md, lg, xl, full
+- ✅ Bloqueo de scroll del body
+- ✅ preventClose para modales críticos
+- ✅ Accesibilidad con Headless UI Dialog
+- ✅ Sub-componentes: ModalBody, ModalFooter
+- ✅ Modo oscuro
+
+**Ejemplo de uso**:
+```tsx
+<Modal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="Confirm Action"
+  size="md"
+>
+  <ModalBody>
+    <p>Are you sure?</p>
+  </ModalBody>
+  <ModalFooter>
+    <Button variant="ghost" onClick={onClose}>Cancel</Button>
+    <Button variant="primary" onClick={onConfirm}>Confirm</Button>
+  </ModalFooter>
+</Modal>
+```
+
+---
+
+#### 5. Skeleton Component ✅
+**Ubicación**: `src/components/common/Skeleton.tsx`
+
+**Características implementadas**:
+- ✅ 4 variantes: text, circle, rectangle, card
+- ✅ Animación shimmer (gradiente animado)
+- ✅ Componentes pre-configurados: SkeletonProductCard, SkeletonProductGrid, SkeletonText, SkeletonAvatar
+- ✅ Composable y flexible
+- ✅ Modo oscuro
+
+**Ejemplo de uso**:
+```tsx
+<SkeletonProductGrid count={8} />
+<SkeletonText lines={3} />
+<SkeletonAvatar size={64} />
+```
+
+---
+
+#### 6. ThemeContext & ThemeToggle ✅
+**Ubicación**: 
+- `src/contexts/ThemeContext.tsx`
+- `src/hooks/useTheme.ts`
+- `src/components/common/ThemeToggle.tsx`
+
+**Características implementadas**:
+- ✅ Context API con ThemeProvider
+- ✅ 3 modos: light, dark, system (auto-detect)
+- ✅ Persistencia en localStorage
+- ✅ Escucha cambios del sistema (prefers-color-scheme)
+- ✅ Hook useTheme() para consumir el contexto
+- ✅ ThemeToggle con animación de iconos (sol/luna)
+- ✅ ThemeToggleSwitch (diseño de switch)
+- ✅ Tooltip en hover
+
+**Ejemplo de uso**:
+```tsx
+// En main.tsx o App.tsx
+<ThemeProvider defaultTheme="system">
+  <App />
+</ThemeProvider>
+
+// En cualquier componente
+const { theme, toggleTheme, resolvedTheme } = useTheme();
+
+// Toggle button
+<ThemeToggle />
+<ThemeToggleSwitch />
+```
+
+---
+
+#### 7. Header Component ✅
+**Ubicación**: `src/components/layout/Header.tsx`
+
+**Características implementadas**:
+- ✅ Logo de Yard Sale
+- ✅ Navegación horizontal (6 categorías)
+- ✅ Buscador con icono
+- ✅ Carrito con badge animado de cantidad
+- ✅ Avatar de usuario / botón Sign In
+- ✅ Theme toggle integrado
+- ✅ Menú móvil hamburguesa con animación
+- ✅ Sticky header con backdrop blur
+- ✅ Completamente responsive
+- ✅ Modo oscuro
+
+**Props**:
+- `cartItemsCount`: número de items en carrito
+- `onCartClick`: callback al hacer click en carrito
+- `user`: objeto con name y avatar (opcional)
+- `onSearch`: callback de búsqueda
+
+---
+
+#### 8. Footer Component ✅
+**Ubicación**: `src/components/layout/Footer.tsx`
+
+**Características implementadas**:
+- ✅ 4 columnas de links: Shop, Account, Support, Company
+- ✅ Logo y descripción
+- ✅ Redes sociales (Twitter, GitHub, Instagram)
+- ✅ Copyright dinámico con año actual
+- ✅ Responsive (columnas en mobile)
+- ✅ Modo oscuro
+
+---
+
+### 📦 Archivos Creados
 
 ```
-□ Crear Button component con todas sus variantes
-□ Crear Input component con validación
-□ Crear Card component
-□ Crear Modal component con animaciones
-□ Crear Header component responsive
-□ Crear Footer component
-□ Implementar ThemeContext y ThemeToggle
-□ Crear Skeleton loaders
-□ Escribir tests unitarios para componentes
-□ Documentar componentes con ejemplos
-□ Verificar accesibilidad (a11y)
-□ Revisar modo oscuro en todos los componentes
+src/
+├── components/
+│   ├── common/
+│   │   ├── Button.tsx ✅
+│   │   ├── Input.tsx ✅
+│   │   ├── Card.tsx ✅
+│   │   ├── Modal.tsx ✅
+│   │   ├── Skeleton.tsx ✅
+│   │   ├── ThemeToggle.tsx ✅
+│   │   └── index.ts ✅ (exports)
+│   └── layout/
+│       ├── Header.tsx ✅
+│       ├── Footer.tsx ✅
+│       └── index.ts ✅ (exports)
+├── contexts/
+│   └── ThemeContext.tsx ✅
+├── hooks/
+│   └── useTheme.ts ✅
+└── App.tsx ✅ (demo page actualizada)
 ```
+
+---
+
+### 🎨 Demo Page
+
+Se actualizó `App.tsx` con una página de demostración completa que incluye:
+- ✅ Header funcional con carrito
+- ✅ Hero section con botones
+- ✅ Showcase de todos los componentes:
+  - Todas las variantes de Button
+  - Input con diferentes estados
+  - Cards con variantes
+  - Modal funcional
+  - Skeletons con toggle
+- ✅ Footer
+- ✅ ThemeProvider envolviendo toda la app
+
+**Para ver la demo**: `npm run dev`
+
+---
+
+### 📋 Checklist FASE 2
+
+```
+✅ Crear Button component con todas sus variantes
+✅ Crear Input component con validación
+✅ Crear Card component
+✅ Crear Modal component con animaciones
+✅ Crear Header component responsive
+✅ Crear Footer component
+✅ Implementar ThemeContext y ThemeToggle
+✅ Crear Skeleton loaders
+□ Escribir tests unitarios para componentes (PENDIENTE)
+✅ Documentar componentes con ejemplos
+✅ Verificar accesibilidad (a11y)
+✅ Revisar modo oscuro en todos los componentes
+```
+
+---
+
+### ⚡ Verificación de Funcionamiento
+
+Para probar todos los componentes:
+
+```bash
+# 1. Iniciar servidor de desarrollo
+npm run dev
+
+# 2. Abrir en navegador
+http://localhost:5173
+
+# 3. Probar:
+- Tema claro/oscuro (botón en header)
+- Responsive (resize ventana)
+- Botones con diferentes variantes
+- Inputs con validación
+- Cards clickables
+- Modal (botón "View Demo Modal")
+- Skeletons (botón Show/Hide Loading)
+- Header móvil (menú hamburguesa)
+- Carrito (badge animado)
+```
+
+---
+
+### 🐛 Issues Conocidos
+
+1. **Fast Refresh Warning**: El ThemeContext genera un warning de Fast Refresh en desarrollo (no afecta producción)
+   - ⚠️ `Fast refresh only works when a file only exports components`
+   - 💡 **Solución futura**: Separar el Context en un archivo dedicado de contexts
+
+2. **Motion Component Type Issues**: Warnings menores de TypeScript con Framer Motion
+   - ⚠️ Incompatibilidad entre tipos de React y Framer Motion para eventos onDrag
+   - ✅ **No afecta funcionalidad** - es un issue conocido de tipos
+
+---
+
+### 🎯 Siguiente Paso: Testing (Opcional para FASE 2)
+
+Si deseas completar el 100% de FASE 2, el siguiente paso es:
+
+**Escribir tests unitarios** para los componentes base:
+
+```bash
+# Crear archivos de test
+src/components/common/__tests__/
+├── Button.test.tsx
+├── Input.test.tsx
+├── Card.test.tsx
+├── Modal.test.tsx
+└── ThemeToggle.test.tsx
+```
+
+**Ejemplo de test para Button**:
+```tsx
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Button } from '../Button';
+
+describe('Button', () => {
+  it('renders with children', () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByText('Click me')).toBeInTheDocument();
+  });
+
+  it('calls onClick when clicked', () => {
+    const handleClick = vi.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    fireEvent.click(screen.getByText('Click me'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('shows loading spinner', () => {
+    render(<Button loading>Click me</Button>);
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
+});
+```
+
+---
+
+## 🚀 FASE 3: Autenticación (Siguiente)
+
+Una vez satisfecho con FASE 2, continuar con:
+
+### Objetivo FASE 3
+Implementar el sistema completo de autenticación con:
+- AuthContext con login/register/logout
+- Formularios con React Hook Form + Zod
+- Páginas: Login, Register, Recovery
+- ProtectedRoute component
+- Persistencia de sesión
+- Mensajes de error/éxito
+
+**Duración estimada**: 2-3 días
+
+---
+
+**🎉 FASE 2 COMPLETADA AL 90% - ¡Todos los componentes base están listos para usar!**
 
 ---
 
