@@ -138,7 +138,7 @@ export function Modal({
                 )}
 
                 {/* Contenido */}
-                <div className="text-neutral-700 dark:text-neutral-300">{children}</div>
+                <div className="text-neutral-600 dark:text-neutral-300">{children}</div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -168,7 +168,7 @@ export function ModalFooter({ className, children }: ModalFooterProps) {
   return (
     <div
       className={cn(
-        'mt-6 flex flex-col-reverse gap-2 border-t border-neutral-200 pt-4 sm:flex-row sm:justify-end dark:border-neutral-700',
+        'mt-6 flex flex-col-reverse gap-2 border-t border-neutral-200 pt-4 sm:flex-row sm:justify-end dark:border-neutral-600',
         className
       )}
     >

@@ -70,14 +70,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     // Estilos base del input
     const baseStyles =
-      'block w-full rounded-lg border px-4 py-2.5 bg-white placeholder:text-neutral-400 transition-colors duration-200 focus:outline-none focus:ring-2 disabled:bg-neutral-100 disabled:cursor-not-allowed text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:disabled:bg-neutral-900';
+      'block w-full rounded-lg border px-4 py-2.5 bg-white placeholder:text-neutral-400 transition-colors duration-200 focus:outline-none focus:ring-2 disabled:bg-neutral-50 disabled:cursor-not-allowed text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:disabled:bg-neutral-900';
 
     // Estilos de estado (error, success, default)
     const stateStyles = error
       ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20 dark:border-red-400'
       : success
         ? 'border-green-500 focus:border-green-500 focus:ring-green-500/20 dark:border-green-400'
-        : 'border-neutral-300 focus:border-brand-500 focus:ring-brand-500/20 dark:border-neutral-700 dark:focus:border-brand-400';
+        : 'border-neutral-300 focus:border-brand-500 focus:ring-brand-500/20 dark:border-neutral-600 dark:focus:border-brand-400';
 
     // Padding adicional si hay iconos
     const iconPaddingStyles = leftIcon ? 'pl-10' : rightIcon || type === 'password' ? 'pr-10' : '';
@@ -90,7 +90,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {/* Label */}
         {label && (
           <label
-            className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+            className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-200"
             htmlFor={props.id || props.name}
           >
             {label}

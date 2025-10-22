@@ -52,7 +52,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     const variantStyles: Record<CardVariant, string> = {
       default: 'shadow-sm',
       elevated: 'shadow-md',
-      outlined: 'border border-neutral-200 dark:border-neutral-700',
+      outlined: 'border border-neutral-300 dark:border-neutral-600',
     };
 
     // Padding
@@ -109,7 +109,7 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, children, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('mb-3 border-b border-neutral-200 pb-3 dark:border-neutral-700', className)}
+      className={cn('mb-3 border-b border-neutral-200 pb-3 dark:border-neutral-600', className)}
       {...props}
     >
       {children}
@@ -126,7 +126,7 @@ export interface CardBodyProps extends HTMLAttributes<HTMLDivElement> {
 
 export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
   ({ className, children, ...props }, ref) => (
-    <div ref={ref} className={cn('text-neutral-700 dark:text-neutral-300', className)} {...props}>
+    <div ref={ref} className={cn('text-neutral-600 dark:text-neutral-300', className)} {...props}>
       {children}
     </div>
   )
@@ -143,7 +143,7 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className, children, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('mt-3 border-t border-neutral-200 pt-3 dark:border-neutral-700', className)}
+      className={cn('mt-3 border-t border-neutral-200 pt-3 dark:border-neutral-600', className)}
       {...props}
     >
       {children}
