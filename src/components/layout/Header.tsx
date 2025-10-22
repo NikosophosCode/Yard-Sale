@@ -64,7 +64,7 @@ export function Header({
   return (
     <header
       className={cn(
-        'sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/80 backdrop-blur-lg dark:border-neutral-800 dark:bg-neutral-900/80',
+        'sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/80 backdrop-blur-lg dark:border-neutral-700 dark:bg-neutral-900/80',
         className
       )}
     >
@@ -99,7 +99,7 @@ export function Header({
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="focus:border-brand-500 focus:ring-brand-500/20 w-full rounded-full border border-neutral-300 bg-neutral-50 py-2 pr-4 pl-10 text-sm text-neutral-900 transition-colors focus:bg-white focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:bg-neutral-900"
+                className="focus:border-brand-500 focus:ring-brand-500/20 w-full rounded-full border border-neutral-300 bg-neutral-50 py-2 pr-4 pl-10 text-sm text-neutral-900 transition-colors focus:bg-white focus:ring-2 focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:bg-neutral-900"
               />
               <MagnifyingGlassIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-neutral-400" />
             </div>
@@ -188,7 +188,7 @@ export function Header({
                       placeholder="Search products..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="focus:border-brand-500 focus:ring-brand-500/20 w-full rounded-full border border-neutral-300 bg-neutral-50 py-2 pr-4 pl-10 text-sm text-neutral-900 transition-colors focus:bg-white focus:ring-2 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100"
+                      className="focus:border-brand-500 focus:ring-brand-500/20 w-full rounded-full border border-neutral-300 bg-neutral-50 py-2 pr-4 pl-10 text-sm text-neutral-900 transition-colors focus:bg-white focus:ring-2 focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
                     />
                     <MagnifyingGlassIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-neutral-400" />
                   </div>

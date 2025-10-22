@@ -84,7 +84,7 @@ export function Footer({ className }: FooterProps) {
   return (
     <footer
       className={cn(
-        'border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900',
+        'border-t border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900',
         className
       )}
     >
@@ -94,10 +94,7 @@ export function Footer({ className }: FooterProps) {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <a href="/" className="flex items-center gap-2">
-              <img src="/assets/logos/logo_yard_sale.svg" alt="Yard Sale" className="h-8 w-8" />
-              <span className="text-brand-600 dark:text-brand-400 text-xl font-bold">
-                Yard Sale
-              </span>
+              <img src="/assets/logos/logo_yard_sale.svg" alt="Yard Sale" className="h-32 w-32" />
             </a>
             <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
               Your trusted marketplace for quality pre-owned items. Find great deals on everything
