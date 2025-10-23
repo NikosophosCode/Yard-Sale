@@ -28,3 +28,5 @@ export type { SkeletonProps, SkeletonVariant } from './Skeleton';
 
 export { ThemeToggle, ThemeToggleSwitch } from './ThemeToggle';
 export type { ThemeToggleProps } from './ThemeToggle';
+
+export { AddressCard } from './AddressCard';
