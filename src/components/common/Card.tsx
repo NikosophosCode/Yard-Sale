@@ -26,13 +26,13 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
  * @example
  * ```tsx
  * <Card variant="elevated" hoverEffect clickable>
- *   <CardHeader>Title</CardHeader>
- *   <CardBody>Content</CardBody>
- *   <CardFooter>Footer</CardFooter>
+ *   <Card.Header>Title</Card.Header>
+ *   <Card.Body>Content</Card.Body>
+ *   <Card.Footer>Footer</Card.Footer>
  * </Card>
  * ```
  */
-export const Card = forwardRef<HTMLDivElement, CardProps>(
+const CardComponent = forwardRef<HTMLDivElement, CardProps>(
   (
     {
       variant = 'default',
@@ -96,7 +96,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
   }
 );
 
-Card.displayName = 'Card';
+CardComponent.displayName = 'Card';
 
 // Sub-componentes para estructura semántica
 
@@ -152,3 +152,17 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
 );
 
 CardFooter.displayName = 'CardFooter';
+
+// Crear el componente Card con sub-componentes
+type CardWithSubComponents = typeof CardComponent & {
+  Header: typeof CardHeader;
+  Body: typeof CardBody;
+  Footer: typeof CardFooter;
+};
+
+export const Card = CardComponent as CardWithSubComponents;
+
+// Asignar sub-componentes al componente Card
+Card.Header = CardHeader;
+Card.Body = CardBody;
+Card.Footer = CardFooter;
