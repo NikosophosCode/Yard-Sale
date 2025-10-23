@@ -1,22 +1,22 @@
 import { Outlet } from 'react-router-dom';
 import { Header, Footer } from '@components/layout';
 import { CartSidebar } from '@components/cart';
+import { Breadcrumbs, SkipLink } from '@components/common';
 
 /**
  * Layout principal de la aplicación con Header, Footer y CartSidebar
  */
 export function MainLayout() {
-  const handleSearch = (query: string) => {
-    console.log('Searching for:', query);
-    // TODO: Implementar búsqueda real
-  };
-
   return (
     <div className="flex min-h-screen flex-col">
-      <Header onSearch={handleSearch} />
+      <SkipLink />
+      <Header />
 
-      <main className="flex-1">
-        <Outlet />
+      <main id="main-content" className="flex-1" tabIndex={-1}>
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <Breadcrumbs />
+          <Outlet />
+        </div>
       </main>
 
       <Footer />

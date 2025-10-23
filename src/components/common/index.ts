@@ -30,3 +30,11 @@ export { ThemeToggle, ThemeToggleSwitch } from './ThemeToggle';
 export type { ThemeToggleProps } from './ThemeToggle';
 
 export { AddressCard } from './AddressCard';
+
+export { Breadcrumbs } from './Breadcrumbs';
+export type { BreadcrumbsProps } from './Breadcrumbs';
+
+export { SkipLink } from './SkipLink';
+
+export { SEO } from './SEO';
+export type { SEOProps } from './SEO';
