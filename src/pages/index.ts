@@ -7,3 +7,4 @@ export { Cart } from './Cart';
 export { Checkout } from './Checkout';
 export { OrderSuccess } from './OrderSuccess';
 export { Orders } from './Orders';
+export { Account } from './Account';

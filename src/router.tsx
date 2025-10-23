@@ -9,6 +9,7 @@ import {
   Checkout,
   OrderSuccess,
   Orders,
+  Account,
 } from '@/pages';
 import { MainLayout } from '@components/layout';
 import { ProtectedRoute } from '@components/auth';
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
       {
         path: 'orders',
         element: <Orders />,
+      },
+      {
+        path: 'account',
+        element: (
+          <ProtectedRoute>
+            <Account />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
