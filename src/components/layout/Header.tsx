@@ -15,19 +15,17 @@ import { cn } from '@/utils/helpers';
 export interface HeaderProps {
   /** Clase CSS adicional */
   className?: string;
-  /** Callback para búsqueda */
-  onSearch?: (query: string) => void;
 }
 
 /**
- * Header principal de la aplicación con navegación, búsqueda y carrito
+ * Header principal de la aplicación con navegación y carrito
  *
  * @example
  * ```tsx
- * <Header onSearch={(query) => console.log(query)} />
+ * <Header />
  * ```
  */
-export function Header({ className, onSearch }: HeaderProps) {
+export function Header({ className }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { user } = useAuth();
@@ -37,9 +35,8 @@ export function Header({ className, onSearch }: HeaderProps) {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (onSearch && searchQuery.trim()) {
-      onSearch(searchQuery.trim());
-    }
+    // La búsqueda solo está disponible en la página principal
+    console.log('Search:', searchQuery);
   };
 
   const navLinks = [
@@ -69,7 +66,7 @@ export function Header({ className, onSearch }: HeaderProps) {
           </a>
 
           {/* Navegación Desktop */}
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden flex-1 items-center gap-1 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -80,20 +77,6 @@ export function Header({ className, onSearch }: HeaderProps) {
               </a>
             ))}
           </div>
-
-          {/* Barra de búsqueda */}
-          <form onSubmit={handleSearchSubmit} className="hidden max-w-md flex-1 lg:block">
-            <div className="relative">
-              <input
-                type="search"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="focus:border-brand-500 focus:ring-brand-500/20 w-full rounded-full border border-neutral-300 bg-neutral-50 py-2 pr-4 pl-10 text-sm text-neutral-900 transition-colors focus:bg-white focus:ring-2 focus:outline-none dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:bg-neutral-900"
-              />
-              <MagnifyingGlassIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-neutral-400" />
-            </div>
-          </form>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
