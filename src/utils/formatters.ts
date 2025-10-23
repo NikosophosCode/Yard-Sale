@@ -6,6 +6,9 @@ export const formatPrice = (price: number): string => {
   }).format(price);
 };
 
+// Alias para formatPrice
+export const formatCurrency = formatPrice;
+
 // Función para formatear fechas
 export const formatDate = (date: string | Date): string => {
   return new Intl.DateTimeFormat('en-US', {

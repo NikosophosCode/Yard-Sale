@@ -77,6 +77,51 @@ export const profileSchema = z.object({
 
 export type ProfileFormData = z.infer<typeof profileSchema>;
 
+// Schema para dirección de envío
+export const addressSchema = z.object({
+  street: z
+    .string()
+    .min(1, 'La dirección es requerida')
+    .min(5, 'La dirección debe tener al menos 5 caracteres')
+    .max(100, 'La dirección es demasiado larga'),
+  city: z
+    .string()
+    .min(1, 'La ciudad es requerida')
+    .min(2, 'La ciudad debe tener al menos 2 caracteres')
+    .max(50, 'El nombre de la ciudad es demasiado largo'),
+  state: z
+    .string()
+    .min(1, 'El estado/provincia es requerido')
+    .min(2, 'El estado debe tener al menos 2 caracteres')
+    .max(50, 'El nombre del estado es demasiado largo'),
+  zipCode: z
+    .string()
+    .min(1, 'El código postal es requerido')
+    .regex(/^\d{5}(-\d{4})?$/, 'Código postal inválido (formato: 12345 o 12345-6789)'),
+  country: z
+    .string()
+    .min(1, 'El país es requerido')
+    .min(2, 'El país debe tener al menos 2 caracteres')
+    .max(50, 'El nombre del país es demasiado largo'),
+});
+
+export type AddressFormData = z.infer<typeof addressSchema>;
+
+// Schema para checkout completo
+export const checkoutSchema = z.object({
+  shippingAddress: addressSchema,
+  paymentMethod: z
+    .enum(['credit-card', 'debit-card', 'paypal', 'cash-on-delivery'])
+    .refine((val) => val !== undefined, { message: 'Selecciona un método de pago' }),
+  // Campos opcionales para tarjeta (en producción se usaría Stripe/PayPal)
+  cardNumber: z.string().optional(),
+  cardName: z.string().optional(),
+  cardExpiry: z.string().optional(),
+  cardCvc: z.string().optional(),
+});
+
+export type CheckoutFormData = z.infer<typeof checkoutSchema>;
+
 // Utilidad para validar fuerza de contraseña
 export function getPasswordStrength(password: string): {
   score: number;
