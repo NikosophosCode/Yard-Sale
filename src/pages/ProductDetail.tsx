@@ -7,11 +7,14 @@ import {
   ArrowLeftIcon,
   TruckIcon,
   ShieldCheckIcon,
+  MinusIcon,
+  PlusIcon,
 } from '@heroicons/react/24/solid';
 import { StarIcon as StarOutlineIcon } from '@heroicons/react/24/outline';
 import type { Product } from '@/types';
 import { getProductById, getRelatedProducts } from '@/api/products';
 import { formatPrice } from '@/utils/formatters';
+import { useCart } from '@/hooks/useCart';
 import { Button } from '@components/common/Button';
 import { Skeleton } from '@components/common/Skeleton';
 import { ProductCard } from '@components/product/ProductCard';
@@ -25,6 +28,8 @@ export function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const { addItem, openCart, getItemById } = useCart();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -57,10 +62,34 @@ export function ProductDetail() {
   }, [id]);
 
   const handleAddToCart = () => {
-    if (!product) return;
-    console.log('Agregando al carrito:', product);
-    // TODO: Implementar en FASE 5
+    if (!product || product.stock === 0) return;
+
+    // Agregar la cantidad seleccionada
+    for (let i = 0; i < quantity; i++) {
+      addItem(product);
+    }
+
+    openCart();
+    setQuantity(1); // Reset quantity
   };
+
+  const handleIncrement = () => {
+    if (product && quantity < product.stock) {
+      setQuantity((prev) => prev + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
+
+  // Calcular cantidad ya en el carrito
+  const cartItem = product ? getItemById(product.id) : undefined;
+  const cartQuantity = cartItem?.quantity || 0;
+  const availableStock = product ? product.stock - cartQuantity : 0;
+  const canAddMore = availableStock > 0;
 
   const renderStars = (rating: number) => {
     const stars = [];
@@ -239,19 +268,69 @@ export function ProductDetail() {
             {/* Stock */}
             <div>
               {product.stock > 0 ? (
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {product.stock > 10 ? (
-                    <span className="text-green-600 dark:text-green-400">✓ En stock</span>
-                  ) : (
-                    <span className="text-orange-600 dark:text-orange-400">
-                      ⚠️ Solo quedan {product.stock} unidades
-                    </span>
+                <div className="space-y-2">
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                    {product.stock > 10 ? (
+                      <span className="text-green-600 dark:text-green-400">✓ En stock</span>
+                    ) : (
+                      <span className="text-orange-600 dark:text-orange-400">
+                        ⚠️ Solo quedan {product.stock} unidades
+                      </span>
+                    )}
+                  </p>
+                  {cartQuantity > 0 && (
+                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                      Ya tienes {cartQuantity} en tu carrito
+                    </p>
                   )}
-                </p>
+                  {!canAddMore && cartQuantity > 0 && (
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      ⚠️ Has alcanzado el stock disponible
+                    </p>
+                  )}
+                </div>
               ) : (
                 <p className="text-sm font-semibold text-red-600 dark:text-red-400">Agotado</p>
               )}
             </div>
+
+            {/* Selector de cantidad */}
+            {product.stock > 0 && canAddMore && (
+              <div>
+                <label className="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                  Cantidad
+                </label>
+                <div className="flex items-center gap-3">
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handleDecrement}
+                    disabled={quantity <= 1}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-neutral-700 shadow-sm transition-colors hover:bg-neutral-100 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
+                    aria-label="Decrease quantity"
+                  >
+                    <MinusIcon className="h-5 w-5" />
+                  </motion.button>
+
+                  <span className="min-w-12 text-center text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                    {quantity}
+                  </span>
+
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handleIncrement}
+                    disabled={quantity >= availableStock}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-neutral-700 shadow-sm transition-colors hover:bg-neutral-100 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
+                    aria-label="Increase quantity"
+                  >
+                    <PlusIcon className="h-5 w-5" />
+                  </motion.button>
+
+                  <span className="text-sm text-neutral-500 dark:text-neutral-400">
+                    ({availableStock} disponibles)
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* Botón agregar al carrito */}
             <Button
@@ -259,10 +338,10 @@ export function ProductDetail() {
               size="lg"
               fullWidth
               onClick={handleAddToCart}
-              disabled={product.stock === 0}
+              disabled={product.stock === 0 || !canAddMore}
               leftIcon={<ShoppingCartIcon className="h-6 w-6" />}
             >
-              {product.stock > 0 ? 'Agregar al carrito' : 'Agotado'}
+              {product.stock === 0 ? 'Agotado' : !canAddMore ? 'Stock máximo en carrito' : 'Agregar al carrito'}
             </Button>
 
             {/* Beneficios */}
@@ -291,7 +370,7 @@ export function ProductDetail() {
             <h2 className="mb-6 text-2xl font-bold text-neutral-900 dark:text-neutral-50">Productos relacionados</h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {relatedProducts.map((related) => (
-                <ProductCard key={related.id} product={related} onAddToCart={handleAddToCart} />
+                <ProductCard key={related.id} product={related} />
               ))}
             </div>
           </div>

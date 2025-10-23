@@ -4,22 +4,28 @@ import { StarIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
 import { StarIcon as StarOutlineIcon } from '@heroicons/react/24/outline';
 import type { Product } from '@/types';
 import { formatPrice } from '@/utils/formatters';
+import { useCart } from '@/hooks/useCart';
 import { cn } from '@/utils/helpers';
 
 export interface ProductCardProps {
   product: Product;
-  onAddToCart?: (product: Product) => void;
   className?: string;
 }
 
 /**
  * Tarjeta de producto con imagen, información y acciones
  */
-export function ProductCard({ product, onAddToCart, className }: ProductCardProps) {
+export function ProductCard({ product, className }: ProductCardProps) {
+  const { addItem, openCart } = useCart();
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault(); // Evitar navegación del Link
     e.stopPropagation();
-    onAddToCart?.(product);
+    
+    if (product.stock > 0) {
+      addItem(product);
+      openCart();
+    }
   };
 
   const renderStars = (rating: number) => {
