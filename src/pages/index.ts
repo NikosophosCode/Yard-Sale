@@ -8,3 +8,4 @@ export { Checkout } from './Checkout';
 export { OrderSuccess } from './OrderSuccess';
 export { Orders } from './Orders';
 export { Account } from './Account';
+export { NotFound } from './NotFound';
