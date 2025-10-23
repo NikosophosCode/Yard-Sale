@@ -4,3 +4,6 @@ export { Register } from './Register';
 export { Recovery } from './Recovery';
 export { ProductDetail } from './ProductDetail';
 export { Cart } from './Cart';
+export { Checkout } from './Checkout';
+export { OrderSuccess } from './OrderSuccess';
+export { Orders } from './Orders';

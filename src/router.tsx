@@ -1,7 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Home, Login, Register, Recovery, ProductDetail, Cart } from '@/pages';
+import {
+  Home,
+  Login,
+  Register,
+  Recovery,
+  ProductDetail,
+  Cart,
+  Checkout,
+  OrderSuccess,
+  Orders,
+} from '@/pages';
 import { MainLayout } from '@components/layout';
-// import { ProtectedRoute } from '@components/auth'; // Para uso futuro
+import { ProtectedRoute } from '@components/auth';
 
 // Definir las rutas de la aplicación
 const router = createBrowserRouter([
@@ -22,6 +32,22 @@ const router = createBrowserRouter([
         path: 'cart',
         element: <Cart />,
       },
+      {
+        path: 'checkout',
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'order-success/:id',
+        element: <OrderSuccess />,
+      },
+      {
+        path: 'orders',
+        element: <Orders />,
+      },
     ],
   },
   // Rutas de autenticación sin layout
@@ -37,34 +63,6 @@ const router = createBrowserRouter([
     path: '/recovery',
     element: <Recovery />,
   },
-  // Ejemplo de ruta protegida (para futuras páginas)
-  // {
-  //   path: '/',
-  //   element: <MainLayout />,
-  //   children: [
-  //     {
-  //       path: 'account',
-  //       element: (
-  //         <ProtectedRoute>
-  //           <Account />
-  //         </ProtectedRoute>
-  //       ),
-  //     },
-  //     {
-  //       path: 'cart',
-  //       element: (
-  //         <ProtectedRoute>
-  //           <Cart />
-  //         </ProtectedRoute>
-  //       ),
-  //     },
-  //   ]
-  // },
-  // Ruta 404 (agregar después)
-  // {
-  //   path: '*',
-  //   element: <NotFound />,
-  // },
 ]);
 
 export function Router() {
