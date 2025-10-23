@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Retro Bike",
-      "price": 120.00,
+      "price": 120,
       "description": "Vintage style bicycle in excellent condition. Perfect for city rides.",
       "category": "others",
       "condition": "like-new",
@@ -20,7 +20,7 @@
     {
       "id": "2",
       "name": "Modern Armchair",
-      "price": 85.00,
+      "price": 85,
       "description": "Comfortable modern armchair with wooden legs. Great condition.",
       "category": "furniture",
       "condition": "good",
@@ -37,7 +37,7 @@
     {
       "id": "3",
       "name": "Gaming Console",
-      "price": 250.00,
+      "price": 250,
       "description": "Latest generation gaming console with two controllers included.",
       "category": "electronics",
       "condition": "new",
@@ -54,7 +54,7 @@
     {
       "id": "4",
       "name": "Designer Sneakers",
-      "price": 65.00,
+      "price": 65,
       "description": "Limited edition designer sneakers. Size 42. Barely worn.",
       "category": "clothes",
       "condition": "like-new",
@@ -71,7 +71,7 @@
     {
       "id": "5",
       "name": "Vintage Camera",
-      "price": 180.00,
+      "price": 180,
       "description": "Classic film camera from the 1980s. Fully functional with leather case.",
       "category": "electronics",
       "condition": "good",
@@ -88,7 +88,7 @@
     {
       "id": "6",
       "name": "Wooden Bookshelf",
-      "price": 95.00,
+      "price": 95,
       "description": "Solid oak bookshelf with 5 shelves. Minor wear, very sturdy.",
       "category": "furniture",
       "condition": "good",
@@ -113,7 +113,7 @@
       "avatar": null,
       "addresses": [],
       "createdAt": "2025-10-01T00:00:00.000Z",
-      "lastLogin": "2025-10-21T00:00:00.000Z"
+      "lastLogin": "2025-10-23T00:11:03.491Z"
     },
     {
       "id": "2",
@@ -129,11 +129,35 @@
   ],
   "orders": [],
   "categories": [
-    { "id": "all", "name": "All", "count": 6 },
-    { "id": "clothes", "name": "Clothes", "count": 1 },
-    { "id": "electronics", "name": "Electronics", "count": 2 },
-    { "id": "furniture", "name": "Furniture", "count": 2 },
-    { "id": "toys", "name": "Toys", "count": 0 },
-    { "id": "others", "name": "Others", "count": 1 }
+    {
+      "id": "all",
+      "name": "All",
+      "count": 6
+    },
+    {
+      "id": "clothes",
+      "name": "Clothes",
+      "count": 1
+    },
+    {
+      "id": "electronics",
+      "name": "Electronics",
+      "count": 2
+    },
+    {
+      "id": "furniture",
+      "name": "Furniture",
+      "count": 2
+    },
+    {
+      "id": "toys",
+      "name": "Toys",
+      "count": 0
+    },
+    {
+      "id": "others",
+      "name": "Others",
+      "count": 1
+    }
   ]
 }
