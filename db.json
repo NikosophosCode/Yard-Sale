@@ -7,11 +7,14 @@
       "description": "Vintage style bicycle in excellent condition. Perfect for city rides.",
       "category": "others",
       "condition": "like-new",
-      "image": "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "image": "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=400",
       "images": [
-        "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&w=1200"
       ],
       "stock": 3,
+      "rating": 4.5,
+      "reviews": 12,
       "featured": true,
       "sellerId": "1",
       "createdAt": "2025-10-01T00:00:00.000Z",
@@ -24,11 +27,13 @@
       "description": "Comfortable modern armchair with wooden legs. Great condition.",
       "category": "furniture",
       "condition": "good",
-      "image": "https://images.pexels.com/photos/245208/pexels-photo-245208.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "image": "https://images.pexels.com/photos/245208/pexels-photo-245208.jpeg?auto=compress&cs=tinysrgb&w=400",
       "images": [
-        "https://images.pexels.com/photos/245208/pexels-photo-245208.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        "https://images.pexels.com/photos/245208/pexels-photo-245208.jpeg?auto=compress&cs=tinysrgb&w=800"
       ],
       "stock": 2,
+      "rating": 4.2,
+      "reviews": 8,
       "featured": true,
       "sellerId": "2",
       "createdAt": "2025-10-02T00:00:00.000Z",
@@ -41,11 +46,13 @@
       "description": "Latest generation gaming console with two controllers included.",
       "category": "electronics",
       "condition": "new",
-      "image": "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "image": "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&w=400",
       "images": [
-        "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        "https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&w=800"
       ],
       "stock": 5,
+      "rating": 4.8,
+      "reviews": 45,
       "featured": true,
       "sellerId": "1",
       "createdAt": "2025-10-03T00:00:00.000Z",
@@ -58,11 +65,13 @@
       "description": "Limited edition designer sneakers. Size 42. Barely worn.",
       "category": "clothes",
       "condition": "like-new",
-      "image": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "image": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400",
       "images": [
-        "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=800"
       ],
       "stock": 1,
+      "rating": 4.6,
+      "reviews": 23,
       "featured": false,
       "sellerId": "3",
       "createdAt": "2025-10-04T00:00:00.000Z",
@@ -75,11 +84,13 @@
       "description": "Classic film camera from the 1980s. Fully functional with leather case.",
       "category": "electronics",
       "condition": "good",
-      "image": "https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "image": "https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&w=400",
       "images": [
-        "https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        "https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&w=800"
       ],
       "stock": 2,
+      "rating": 4.3,
+      "reviews": 15,
       "featured": true,
       "sellerId": "2",
       "createdAt": "2025-10-05T00:00:00.000Z",
@@ -92,15 +103,283 @@
       "description": "Solid oak bookshelf with 5 shelves. Minor wear, very sturdy.",
       "category": "furniture",
       "condition": "good",
-      "image": "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "image": "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=400",
       "images": [
-        "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800"
       ],
       "stock": 1,
+      "rating": 4.0,
+      "reviews": 6,
       "featured": false,
       "sellerId": "1",
       "createdAt": "2025-10-06T00:00:00.000Z",
       "updatedAt": "2025-10-06T00:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "name": "Wireless Headphones",
+      "price": 89,
+      "description": "Premium wireless headphones with noise cancellation. Battery lasts 30 hours.",
+      "category": "electronics",
+      "condition": "new",
+      "image": "https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 8,
+      "rating": 4.7,
+      "reviews": 67,
+      "featured": true,
+      "sellerId": "1",
+      "createdAt": "2025-10-07T00:00:00.000Z",
+      "updatedAt": "2025-10-07T00:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "name": "Leather Jacket",
+      "price": 145,
+      "description": "Genuine leather jacket. Size L. Classic biker style in black.",
+      "category": "clothes",
+      "condition": "like-new",
+      "image": "https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 2,
+      "rating": 4.9,
+      "reviews": 34,
+      "featured": true,
+      "sellerId": "2",
+      "createdAt": "2025-10-08T00:00:00.000Z",
+      "updatedAt": "2025-10-08T00:00:00.000Z"
+    },
+    {
+      "id": "9",
+      "name": "Coffee Table",
+      "price": 75,
+      "description": "Minimalist coffee table with glass top and metal frame.",
+      "category": "furniture",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/1350778/pexels-photo-1350778.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/1350778/pexels-photo-1350778.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 3,
+      "rating": 4.1,
+      "reviews": 11,
+      "featured": false,
+      "sellerId": "3",
+      "createdAt": "2025-10-09T00:00:00.000Z",
+      "updatedAt": "2025-10-09T00:00:00.000Z"
+    },
+    {
+      "id": "10",
+      "name": "Smartwatch",
+      "price": 199,
+      "description": "Fitness tracker smartwatch with heart rate monitor and GPS.",
+      "category": "electronics",
+      "condition": "new",
+      "image": "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 6,
+      "rating": 4.5,
+      "reviews": 89,
+      "featured": true,
+      "sellerId": "1",
+      "createdAt": "2025-10-10T00:00:00.000Z",
+      "updatedAt": "2025-10-10T00:00:00.000Z"
+    },
+    {
+      "id": "11",
+      "name": "Vintage Vinyl Records",
+      "price": 45,
+      "description": "Collection of 10 classic rock vinyl records from the 70s. Great sound quality.",
+      "category": "others",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 1,
+      "rating": 4.8,
+      "reviews": 7,
+      "featured": false,
+      "sellerId": "2",
+      "createdAt": "2025-10-11T00:00:00.000Z",
+      "updatedAt": "2025-10-11T00:00:00.000Z"
+    },
+    {
+      "id": "12",
+      "name": "Running Shoes",
+      "price": 79,
+      "description": "Professional running shoes with cushioned sole. Size 43. Used twice.",
+      "category": "clothes",
+      "condition": "like-new",
+      "image": "https://images.pexels.com/photos/2385477/pexels-photo-2385477.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/2385477/pexels-photo-2385477.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 2,
+      "rating": 4.4,
+      "reviews": 28,
+      "featured": false,
+      "sellerId": "3",
+      "createdAt": "2025-10-12T00:00:00.000Z",
+      "updatedAt": "2025-10-12T00:00:00.000Z"
+    },
+    {
+      "id": "13",
+      "name": "Desk Lamp",
+      "price": 35,
+      "description": "Adjustable LED desk lamp with touch controls. Energy efficient.",
+      "category": "furniture",
+      "condition": "new",
+      "image": "https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 12,
+      "rating": 4.2,
+      "reviews": 41,
+      "featured": false,
+      "sellerId": "1",
+      "createdAt": "2025-10-13T00:00:00.000Z",
+      "updatedAt": "2025-10-13T00:00:00.000Z"
+    },
+    {
+      "id": "14",
+      "name": "Mechanical Keyboard",
+      "price": 110,
+      "description": "RGB mechanical keyboard with cherry MX switches. Gaming grade.",
+      "category": "electronics",
+      "condition": "like-new",
+      "image": "https://images.pexels.com/photos/1194713/pexels-photo-1194713.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/1194713/pexels-photo-1194713.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 4,
+      "rating": 4.7,
+      "reviews": 52,
+      "featured": true,
+      "sellerId": "2",
+      "createdAt": "2025-10-14T00:00:00.000Z",
+      "updatedAt": "2025-10-14T00:00:00.000Z"
+    },
+    {
+      "id": "15",
+      "name": "Winter Coat",
+      "price": 95,
+      "description": "Warm winter coat with faux fur hood. Size M. Waterproof material.",
+      "category": "clothes",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/1124468/pexels-photo-1124468.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 3,
+      "rating": 4.3,
+      "reviews": 19,
+      "featured": false,
+      "sellerId": "3",
+      "createdAt": "2025-10-15T00:00:00.000Z",
+      "updatedAt": "2025-10-15T00:00:00.000Z"
+    },
+    {
+      "id": "16",
+      "name": "Dining Table Set",
+      "price": 320,
+      "description": "Wooden dining table with 6 chairs. Modern design, seats 6-8 people.",
+      "category": "furniture",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/1395122/pexels-photo-1395122.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/1395122/pexels-photo-1395122.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 1,
+      "rating": 4.6,
+      "reviews": 14,
+      "featured": true,
+      "sellerId": "1",
+      "createdAt": "2025-10-16T00:00:00.000Z",
+      "updatedAt": "2025-10-16T00:00:00.000Z"
+    },
+    {
+      "id": "17",
+      "name": "Bluetooth Speaker",
+      "price": 55,
+      "description": "Portable waterproof bluetooth speaker. 360° sound, 12 hours battery.",
+      "category": "electronics",
+      "condition": "new",
+      "image": "https://images.pexels.com/photos/8000608/pexels-photo-8000608.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/8000608/pexels-photo-8000608.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 15,
+      "rating": 4.4,
+      "reviews": 73,
+      "featured": false,
+      "sellerId": "2",
+      "createdAt": "2025-10-17T00:00:00.000Z",
+      "updatedAt": "2025-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "18",
+      "name": "Board Game Collection",
+      "price": 60,
+      "description": "Set of 5 classic board games including Monopoly, Scrabble, and Chess.",
+      "category": "toys",
+      "condition": "good",
+      "image": "https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 2,
+      "rating": 4.5,
+      "reviews": 22,
+      "featured": false,
+      "sellerId": "3",
+      "createdAt": "2025-10-18T00:00:00.000Z",
+      "updatedAt": "2025-10-18T00:00:00.000Z"
+    },
+    {
+      "id": "19",
+      "name": "Sunglasses",
+      "price": 42,
+      "description": "Polarized sunglasses with UV protection. Classic aviator style.",
+      "category": "clothes",
+      "condition": "new",
+      "image": "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 7,
+      "rating": 4.2,
+      "reviews": 36,
+      "featured": false,
+      "sellerId": "1",
+      "createdAt": "2025-10-19T00:00:00.000Z",
+      "updatedAt": "2025-10-19T00:00:00.000Z"
+    },
+    {
+      "id": "20",
+      "name": "Office Chair",
+      "price": 135,
+      "description": "Ergonomic office chair with lumbar support and adjustable height.",
+      "category": "furniture",
+      "condition": "like-new",
+      "image": "https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "images": [
+        "https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=800"
+      ],
+      "stock": 4,
+      "rating": 4.6,
+      "reviews": 48,
+      "featured": true,
+      "sellerId": "2",
+      "createdAt": "2025-10-20T00:00:00.000Z",
+      "updatedAt": "2025-10-20T00:00:00.000Z"
     }
   ],
   "users": [
@@ -132,32 +411,32 @@
     {
       "id": "all",
       "name": "All",
-      "count": 6
+      "count": 20
     },
     {
       "id": "clothes",
       "name": "Clothes",
-      "count": 1
+      "count": 5
     },
     {
       "id": "electronics",
       "name": "Electronics",
-      "count": 2
+      "count": 6
     },
     {
       "id": "furniture",
       "name": "Furniture",
-      "count": 2
+      "count": 6
     },
     {
       "id": "toys",
       "name": "Toys",
-      "count": 0
+      "count": 1
     },
     {
       "id": "others",
       "name": "Others",
-      "count": 1
+      "count": 2
     }
   ]
 }

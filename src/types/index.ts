@@ -9,6 +9,8 @@ export interface Product {
   image: string;
   images: string[];
   stock: number;
+  rating: number;
+  reviews: number;
   featured: boolean;
   sellerId: string;
   createdAt: string;
