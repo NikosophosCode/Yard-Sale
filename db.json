@@ -108,7 +108,7 @@
         "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800"
       ],
       "stock": 1,
-      "rating": 4.0,
+      "rating": 4,
       "reviews": 6,
       "featured": false,
       "sellerId": "1",
@@ -392,7 +392,7 @@
       "avatar": null,
       "addresses": [],
       "createdAt": "2025-10-01T00:00:00.000Z",
-      "lastLogin": "2025-10-23T00:11:03.491Z"
+      "lastLogin": "2025-10-23T03:06:40.417Z"
     },
     {
       "id": "2",
