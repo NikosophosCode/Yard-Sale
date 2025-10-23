@@ -23,11 +23,6 @@ export async function getProducts(filters: ProductFilters = {}): Promise<Product
       params.append('category', filters.category);
     }
 
-    // Filtro por búsqueda (nombre o descripción)
-    if (filters.search) {
-      params.append('q', filters.search);
-    }
-
     // Filtro por condición
     if (filters.condition) {
       params.append('condition', filters.condition);
@@ -68,6 +63,16 @@ export async function getProducts(filters: ProductFilters = {}): Promise<Product
     }
 
     let products: Product[] = await response.json();
+
+    // Filtro de búsqueda (nombre y descripción) - lado cliente
+    if (filters.search && filters.search.trim()) {
+      const searchLower = filters.search.toLowerCase().trim();
+      products = products.filter((p) => {
+        const nameMatch = p.name.toLowerCase().includes(searchLower);
+        const descMatch = p.description.toLowerCase().includes(searchLower);
+        return nameMatch || descMatch;
+      });
+    }
 
     // Filtros adicionales que JSON Server no soporta nativamente
     if (filters.minPrice !== undefined) {
