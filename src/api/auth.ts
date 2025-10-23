@@ -239,6 +239,159 @@ export async function changePassword(
 }
 
 /**
+ * Agregar nueva dirección
+ */
+export async function addAddress(userId: string, address: Omit<import('@/types').Address, 'id'>): Promise<User> {
+  await delay(600);
+
+  try {
+    // Obtener usuario actual
+    const response = await fetch(`${API_URL}/users/${userId}`);
+
+    if (!response.ok) {
+      throw new Error('Error al obtener datos del usuario');
+    }
+
+    const user: User = await response.json();
+
+    // Si es la única dirección o se marca como default, desmarcar otras
+    const addresses = address.isDefault
+      ? user.addresses.map((addr) => ({ ...addr, isDefault: false }))
+      : user.addresses;
+
+    // Agregar nueva dirección con ID único
+    const newAddress: import('@/types').Address = {
+      ...address,
+      id: `addr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    };
+
+    const updatedAddresses = [...addresses, newAddress];
+
+    // Actualizar usuario
+    const updateResponse = await fetch(`${API_URL}/users/${userId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ addresses: updatedAddresses }),
+    });
+
+    if (!updateResponse.ok) {
+      throw new Error('Error al agregar dirección');
+    }
+
+    const updatedUser: User = await updateResponse.json();
+    return updatedUser;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Error inesperado al agregar dirección');
+  }
+}
+
+/**
+ * Actualizar dirección existente
+ */
+export async function updateAddress(
+  userId: string,
+  addressId: string,
+  address: Partial<Omit<import('@/types').Address, 'id'>>
+): Promise<User> {
+  await delay(600);
+
+  try {
+    // Obtener usuario actual
+    const response = await fetch(`${API_URL}/users/${userId}`);
+
+    if (!response.ok) {
+      throw new Error('Error al obtener datos del usuario');
+    }
+
+    const user: User = await response.json();
+
+    // Buscar y actualizar la dirección
+    const addressIndex = user.addresses.findIndex((addr) => addr.id === addressId);
+
+    if (addressIndex === -1) {
+      throw new Error('Dirección no encontrada');
+    }
+
+    // Si se marca como default, desmarcar otras
+    let addresses = [...user.addresses];
+    if (address.isDefault) {
+      addresses = addresses.map((addr) => ({ ...addr, isDefault: false }));
+    }
+
+    // Actualizar la dirección específica
+    addresses[addressIndex] = { ...addresses[addressIndex], ...address };
+
+    // Actualizar usuario
+    const updateResponse = await fetch(`${API_URL}/users/${userId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ addresses }),
+    });
+
+    if (!updateResponse.ok) {
+      throw new Error('Error al actualizar dirección');
+    }
+
+    const updatedUser: User = await updateResponse.json();
+    return updatedUser;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Error inesperado al actualizar dirección');
+  }
+}
+
+/**
+ * Eliminar dirección
+ */
+export async function deleteAddress(userId: string, addressId: string): Promise<User> {
+  await delay(600);
+
+  try {
+    // Obtener usuario actual
+    const response = await fetch(`${API_URL}/users/${userId}`);
+
+    if (!response.ok) {
+      throw new Error('Error al obtener datos del usuario');
+    }
+
+    const user: User = await response.json();
+
+    // Filtrar la dirección a eliminar
+    const updatedAddresses = user.addresses.filter((addr) => addr.id !== addressId);
+
+    // Si se eliminó la dirección default y hay más, marcar la primera como default
+    const hadDefault = user.addresses.find((addr) => addr.id === addressId)?.isDefault;
+    if (hadDefault && updatedAddresses.length > 0) {
+      updatedAddresses[0].isDefault = true;
+    }
+
+    // Actualizar usuario
+    const updateResponse = await fetch(`${API_URL}/users/${userId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ addresses: updatedAddresses }),
+    });
+
+    if (!updateResponse.ok) {
+      throw new Error('Error al eliminar dirección');
+    }
+
+    const updatedUser: User = await updateResponse.json();
+    return updatedUser;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Error inesperado al eliminar dirección');
+  }
+}
+
+/**
  * Generar un token JWT simulado (mock)
  * En producción esto se haría en el backend
  */
