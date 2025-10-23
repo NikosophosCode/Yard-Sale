@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Home, Login, Register, Recovery, ProductDetail } from '@/pages';
+import { Home, Login, Register, Recovery, ProductDetail, Cart } from '@/pages';
 import { MainLayout } from '@components/layout';
 // import { ProtectedRoute } from '@components/auth'; // Para uso futuro
 
@@ -17,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: 'product/:id',
         element: <ProductDetail />,
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
       },
     ],
   },
