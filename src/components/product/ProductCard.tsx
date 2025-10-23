@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { StarIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
@@ -14,8 +15,9 @@ export interface ProductCardProps {
 
 /**
  * Tarjeta de producto con imagen, información y acciones
+ * Optimizado con React.memo para evitar re-renders innecesarios
  */
-export function ProductCard({ product, className }: ProductCardProps) {
+export const ProductCard = memo(function ProductCard({ product, className }: ProductCardProps) {
   const { addItem, openCart } = useCart();
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -167,4 +169,4 @@ export function ProductCard({ product, className }: ProductCardProps) {
       </Link>
     </motion.article>
   );
-}
+});
