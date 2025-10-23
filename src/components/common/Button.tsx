@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/utils/helpers';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
   /** Variante visual del botón */
   variant?: ButtonVariant;
   /** Tamaño del botón */

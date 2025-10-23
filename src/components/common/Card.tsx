@@ -1,11 +1,11 @@
 import { forwardRef } from 'react';
-import type { HTMLAttributes, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import type { ReactNode, HTMLAttributes } from 'react';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/utils/helpers';
 
 export type CardVariant = 'default' | 'elevated' | 'outlined';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends Omit<HTMLMotionProps<'div'>, 'ref'> {
   /** Variante visual de la card */
   variant?: CardVariant;
   /** Indica si la card es clickeable */
@@ -71,10 +71,9 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     // Clickable
     const clickableStyles = clickable ? 'cursor-pointer' : '';
 
-    const Component = clickable ? motion.div : 'div';
-
+    // Siempre usar motion.div para consistencia
     return (
-      <Component
+      <motion.div
         ref={ref}
         className={cn(
           baseStyles,
@@ -84,14 +83,12 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
           clickableStyles,
           className
         )}
-        {...(clickable && {
-          whileHover: { scale: 1.02, y: -4 },
-          whileTap: { scale: 0.98 },
-        })}
+        whileHover={clickable ? { scale: 1.02, y: -4 } : undefined}
+        whileTap={clickable ? { scale: 0.98 } : undefined}
         {...props}
       >
         {children}
-      </Component>
+      </motion.div>
     );
   }
 );
