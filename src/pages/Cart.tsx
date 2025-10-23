@@ -17,8 +17,7 @@ export function Cart() {
   };
 
   const handleCheckout = () => {
-    // TODO: Implementar checkout en FASE 6
-    alert('Checkout coming soon! (FASE 6)');
+    navigate('/checkout');
   };
 
   const handleClearCart = () => {
