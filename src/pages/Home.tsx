@@ -3,7 +3,7 @@ import type { Product } from '@/types';
 import { useAuth } from '@hooks/useAuth';
 import { useProducts } from '@hooks/useProducts';
 import { ProductGrid, ProductFilters, ProductSearch } from '@components/product';
-import { Skeleton } from '@components/common/Skeleton';
+import { Skeleton, SEO } from '@components/common';
 
 export function Home() {
   const { user, isAuthenticated } = useAuth();
@@ -31,8 +31,13 @@ export function Home() {
   };
 
   return (
-    <div className="bg-neutral-50 dark:bg-neutral-900 min-h-screen">
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <>
+      <SEO 
+        title="Home"
+        description="Discover unique second-hand items at great prices. Browse our collection of clothes, electronics, furniture, toys, and more."
+      />
+      <div className="bg-neutral-50 dark:bg-neutral-900 min-h-screen">
+        <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,5 +116,6 @@ export function Home() {
         )}
       </div>
     </div>
+    </>
   );
 }
