@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Home, Login, Register, Recovery } from '@/pages';
+import { Home, Login, Register, Recovery, ProductDetail } from '@/pages';
 import { MainLayout } from '@components/layout';
 // import { ProtectedRoute } from '@components/auth'; // Para uso futuro
 
@@ -13,6 +13,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'product/:id',
+        element: <ProductDetail />,
       },
     ],
   },
