@@ -61,15 +61,29 @@ export interface Cart {
 export interface Order {
   id: string;
   userId: string;
-  items: CartItem[];
+  items: OrderItem[];
+  subtotal: number;
+  tax: number;
+  shipping: number;
   total: number;
   status: OrderStatus;
+  paymentMethod: PaymentMethod;
   shippingAddress: Address;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface OrderItem {
+  productId: string;
+  productName: string;
+  productImage: string;
+  quantity: number;
+  priceAtPurchase: number;
+}
+
 export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+
+export type PaymentMethod = 'credit-card' | 'debit-card' | 'paypal' | 'cash-on-delivery';
 
 // Tipos para categorías
 export interface CategoryInfo {
