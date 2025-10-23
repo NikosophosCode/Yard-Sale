@@ -126,19 +126,27 @@ export function Header({ className, onSearch }: HeaderProps) {
 
             {/* Usuario */}
             {user ? (
-              <a
-                href="/account"
-                className="hidden items-center gap-2 rounded-full py-1.5 pr-3 pl-1.5 transition-colors hover:bg-neutral-100 sm:flex dark:hover:bg-neutral-800"
-              >
-                {user.avatar ? (
-                  <img src={user.avatar} alt={user.name} className="h-8 w-8 rounded-full" />
-                ) : (
-                  <UserCircleIcon className="h-8 w-8 text-neutral-700 dark:text-neutral-300" />
-                )}
-                <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                  {user.name}
-                </span>
-              </a>
+              <div className="hidden items-center gap-2 sm:flex">
+                <a
+                  href="/orders"
+                  className="rounded-full px-3 py-2 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
+                >
+                  My Orders
+                </a>
+                <a
+                  href="/account"
+                  className="flex items-center gap-2 rounded-full py-1.5 pr-3 pl-1.5 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                >
+                  {user.avatar ? (
+                    <img src={user.avatar} alt={user.name} className="h-8 w-8 rounded-full" />
+                  ) : (
+                    <UserCircleIcon className="h-8 w-8 text-neutral-700 dark:text-neutral-300" />
+                  )}
+                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    {user.name}
+                  </span>
+                </a>
+              </div>
             ) : (
               <a
                 href="/login"
@@ -206,20 +214,33 @@ export function Header({ className, onSearch }: HeaderProps) {
 
                 {/* Usuario móvil */}
                 {user ? (
-                  <a
-                    href="/account"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                  >
-                    {user.avatar ? (
-                      <img src={user.avatar} alt={user.name} className="h-10 w-10 rounded-full" />
-                    ) : (
-                      <UserCircleIcon className="h-10 w-10 text-neutral-700 dark:text-neutral-300" />
-                    )}
-                    <span className="text-base font-medium text-neutral-700 dark:text-neutral-300">
-                      {user.name}
-                    </span>
-                  </a>
+                  <>
+                    <a
+                      href="/orders"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block rounded-lg px-3 py-2 text-base font-medium text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
+                    >
+                      📦 My Orders
+                    </a>
+                    <a
+                      href="/account"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                    >
+                      {user.avatar ? (
+                        <img
+                          src={user.avatar}
+                          alt={user.name}
+                          className="h-10 w-10 rounded-full"
+                        />
+                      ) : (
+                        <UserCircleIcon className="h-10 w-10 text-neutral-700 dark:text-neutral-300" />
+                      )}
+                      <span className="text-base font-medium text-neutral-700 dark:text-neutral-300">
+                        {user.name}
+                      </span>
+                    </a>
+                  </>
                 ) : (
                   <a
                     href="/login"
