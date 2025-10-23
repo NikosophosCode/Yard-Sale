@@ -8,17 +8,13 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { ThemeToggle } from '@/components/common';
+import { useAuth } from '@/hooks/useAuth';
+import { useCart } from '@/hooks/useCart';
 import { cn } from '@/utils/helpers';
 
 export interface HeaderProps {
   /** Clase CSS adicional */
   className?: string;
-  /** Cantidad de items en el carrito */
-  cartItemsCount?: number;
-  /** Callback al hacer click en el carrito */
-  onCartClick?: () => void;
-  /** Usuario logueado (null si no está logueado) */
-  user?: { name: string; avatar?: string } | null;
   /** Callback para búsqueda */
   onSearch?: (query: string) => void;
 }
@@ -28,22 +24,16 @@ export interface HeaderProps {
  *
  * @example
  * ```tsx
- * <Header
- *   cartItemsCount={3}
- *   onCartClick={() => setCartOpen(true)}
- *   user={{ name: "John Doe" }}
- * />
+ * <Header onSearch={(query) => console.log(query)} />
  * ```
  */
-export function Header({
-  className,
-  cartItemsCount = 0,
-  onCartClick,
-  user,
-  onSearch,
-}: HeaderProps) {
+export function Header({ className, onSearch }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { user } = useAuth();
+  const { getItemCount, toggleCart } = useCart();
+
+  const cartItemsCount = getItemCount();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,23 +101,28 @@ export function Header({
             <ThemeToggle className="hidden sm:flex" />
 
             {/* Carrito */}
-            <button
+            <motion.button
               type="button"
-              onClick={onCartClick}
+              onClick={toggleCart}
+              whileTap={{ scale: 0.95 }}
               className="relative rounded-full p-2 text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
               aria-label={`Shopping cart with ${cartItemsCount} items`}
             >
               <ShoppingCartIcon className="h-6 w-6" />
-              {cartItemsCount > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="bg-brand-600 dark:bg-brand-500 absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white"
-                >
-                  {cartItemsCount > 9 ? '9+' : cartItemsCount}
-                </motion.span>
-              )}
-            </button>
+              <AnimatePresence>
+                {cartItemsCount > 0 && (
+                  <motion.span
+                    key="cart-badge"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    className="bg-brand-600 dark:bg-brand-500 absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white"
+                  >
+                    {cartItemsCount > 9 ? '9+' : cartItemsCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
 
             {/* Usuario */}
             {user ? (
