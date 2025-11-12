@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import type { Product } from '@/types';
 import { useAuth } from '@hooks/useAuth';
 import { useProducts } from '@hooks/useProducts';
-import { ProductGrid, ProductFilters, ProductSearch } from '@components/product';
+import { ProductGrid, ProductFilters, ProductSearch, FeaturedSlider } from '@components/product';
 import { Skeleton, SEO } from '@components/common';
 
 export function Home() {
@@ -52,7 +52,7 @@ export function Home() {
                 <span className="text-brand-600 dark:text-brand-400">{user.name}</span>!
               </>
             ) : (
-              '¡Bienvenido a Yard Sale!'
+              '¡Bienvenido a Great Sale!'
             )}
           </h1>
           <p className="text-lg text-neutral-600 dark:text-neutral-400">
@@ -64,6 +64,13 @@ export function Home() {
         <div className="mb-6">
           <ProductSearch value={filters.search || ''} onChange={setSearch} />
         </div>
+
+        {/* Featured Products Slider */}
+        {!loading && !error && products.length > 0 && (
+          <div className="mb-12">
+            <FeaturedSlider products={products} autoPlay autoPlayInterval={5000} />
+          </div>
+        )}
 
         {/* Filtros */}
         <div className="mb-8">
