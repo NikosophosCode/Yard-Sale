@@ -6,22 +6,18 @@ import type { Product } from '@/types';
 describe('cartStore', () => {
   const mockProduct: Product = {
     id: '1',
-    title: 'Test Product',
+    name: 'Test Product',
     price: 99.99,
     description: 'Test description',
     category: 'electronics',
+    condition: 'new',
+    image: 'test.jpg',
     images: ['test.jpg'],
-    thumbnail: 'test.jpg',
     stock: 10,
     rating: 4.5,
     reviews: 100,
-    brand: 'Test Brand',
-    condition: 'new',
-    seller: {
-      id: '1',
-      name: 'Test Seller',
-      avatar: 'avatar.jpg',
-    },
+    featured: false,
+    sellerId: '1',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
