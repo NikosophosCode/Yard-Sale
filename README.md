@@ -1,4 +1,4 @@
-# Yard Sale 2.0 🛒
+# Great Sale 2.0 🛒
 
 Aplicación moderna de e-commerce para productos de segunda mano, construida con React + TypeScript + Vite + TailwindCSS. Una plataforma completa con autenticación, carrito de compras, checkout, y gestión de órdenes.
 
@@ -44,6 +44,42 @@ npm install
 # Copiar variables de entorno
 cp .env.example .env
 ```
+
+## 🚀 Modo Producción y Móvil
+
+La aplicación ahora funciona **sin json-server** en modo producción y es accesible desde dispositivos móviles.
+
+### ✨ Características
+- ✅ Funciona con `npm run preview`
+- ✅ Accesible desde dispositivos móviles en la misma red
+- ✅ Fallback automático a datos mock si json-server no está disponible
+- ✅ Sin dependencias externas en producción
+
+### 🎯 Uso Rápido
+
+**Desarrollo (con json-server):**
+```bash
+npm run dev:all
+```
+
+**Preview/Producción (datos mock):**
+```bash
+npm run build
+npm run preview
+# Abre: http://localhost:4173
+# O desde móvil: http://<tu-ip>:4173
+```
+
+**Ver desde móvil:**
+1. Ejecuta `npm run preview`
+2. Busca la URL de Network en la terminal
+3. Ábrela en tu dispositivo móvil
+4. Ejemplo: `http://192.168.109.6:4173`
+
+📚 **Documentación detallada:**
+- [Guía Rápida](docs/QUICK_START_PRODUCTION.md)
+- [Solución Completa](docs/MOCK_API_SOLUTION.md)
+- [Implementación](docs/MOCK_API_IMPLEMENTATION.md)
 
 ## 🎯 Scripts Disponibles
 
@@ -122,7 +158,7 @@ yard-sale-v2/
 ## 🎨 Sistema de Diseño
 
 ### Colores
-- **Brand**: Paleta verde (#acd9b2 - color original de Yard Sale)
+- **Brand**: Paleta verde (#acd9b2 - color original de Great Sale)
 - **Neutral**: Escala de grises para UI
 - **Dark Mode**: Soporte completo con `class` strategy
 
