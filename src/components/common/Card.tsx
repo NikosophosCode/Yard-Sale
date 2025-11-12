@@ -12,6 +12,10 @@ export interface CardProps extends Omit<HTMLMotionProps<'div'>, 'ref'> {
   clickable?: boolean;
   /** Hover effect más pronunciado */
   hoverEffect?: boolean;
+  /** Hover effect (alias de hoverEffect) */
+  hover?: boolean;
+  /** Renderizar como otro componente (e.g., Link) */
+  asChild?: boolean;
   /** Padding de la card */
   padding?: 'none' | 'sm' | 'md' | 'lg';
   /** Clase CSS adicional */
@@ -38,6 +42,8 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       variant = 'default',
       clickable = false,
       hoverEffect = false,
+      hover = false,
+      asChild = false,
       padding = 'md',
       className,
       children,
@@ -63,26 +69,34 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
       lg: 'p-6',
     };
 
-    // Hover effect
-    const hoverStyles = hoverEffect
+    // Hover effect (aceptar tanto hover como hoverEffect)
+    const shouldHover = hover || hoverEffect;
+    const hoverStyles = shouldHover
       ? 'hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1'
       : '';
 
     // Clickable
     const clickableStyles = clickable ? 'cursor-pointer' : '';
 
+    const cardClasses = cn(
+      baseStyles,
+      variantStyles[variant],
+      paddingStyles[padding],
+      hoverStyles,
+      clickableStyles,
+      className
+    );
+
+    // Si asChild es true, renderizar el children con las clases aplicadas
+    if (asChild) {
+      return children;
+    }
+
     // Siempre usar motion.div para consistencia
     return (
       <motion.div
         ref={ref}
-        className={cn(
-          baseStyles,
-          variantStyles[variant],
-          paddingStyles[padding],
-          hoverStyles,
-          clickableStyles,
-          className
-        )}
+        className={cardClasses}
         whileHover={clickable ? { scale: 1.02, y: -4 } : undefined}
         whileTap={clickable ? { scale: 0.98 } : undefined}
         {...props}

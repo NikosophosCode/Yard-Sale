@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 export interface SEOProps {
   title?: string;
   description?: string;
+  keywords?: string[];
   image?: string;
   type?: 'website' | 'article' | 'product';
   author?: string;
@@ -23,7 +24,8 @@ const defaultSEO = {
  */
 export function SEO({ 
   title, 
-  description = defaultSEO.defaultDescription, 
+  description = defaultSEO.defaultDescription,
+  keywords,
   image = defaultSEO.defaultImage,
   type = 'website',
   author 
@@ -39,6 +41,11 @@ export function SEO({
     // Actualizar meta tags
     updateMetaTag('name', 'description', description);
     updateMetaTag('name', 'author', author || defaultSEO.siteName);
+    
+    // Keywords
+    if (keywords && keywords.length > 0) {
+      updateMetaTag('name', 'keywords', keywords.join(', '));
+    }
 
     // Open Graph tags
     updateMetaTag('property', 'og:title', fullTitle);
@@ -56,7 +63,7 @@ export function SEO({
 
     // Canonical URL
     updateCanonicalLink(url);
-  }, [fullTitle, description, image, url, type, author]);
+  }, [fullTitle, description, image, url, type, author, keywords]);
 
   return null; // Este componente no renderiza nada
 }

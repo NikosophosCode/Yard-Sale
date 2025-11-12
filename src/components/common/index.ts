@@ -38,3 +38,6 @@ export { SkipLink } from './SkipLink';
 
 export { SEO } from './SEO';
 export type { SEOProps } from './SEO';
+
+export { Logo } from './Logo';
+export type { LogoProps } from './Logo';

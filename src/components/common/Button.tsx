@@ -19,6 +19,8 @@ export interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
   leftIcon?: ReactNode;
   /** Icono a la derecha del texto */
   rightIcon?: ReactNode;
+  /** Renderizar como otro componente (e.g., Link) */
+  asChild?: boolean;
   /** Clase CSS adicional */
   className?: string;
   /** Contenido del botón */
@@ -44,6 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       fullWidth = false,
       leftIcon,
       rightIcon,
+      asChild = false,
       className,
       children,
       disabled,
@@ -79,15 +82,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     // Estilo de ancho completo
     const widthStyle = fullWidth ? 'w-full' : '';
 
-    return (
-      <motion.button
-        ref={ref}
-        className={cn(baseStyles, variantStyles[variant], sizeStyles[size], widthStyle, className)}
-        disabled={disabled || loading}
-        whileHover={{ scale: disabled || loading ? 1 : 1.02 }}
-        whileTap={{ scale: disabled || loading ? 1 : 0.98 }}
-        {...props}
-      >
+    const buttonClasses = cn(baseStyles, variantStyles[variant], sizeStyles[size], widthStyle, className);
+
+    const content = (
+      <>
         {loading && (
           <svg
             className="h-5 w-5 animate-spin"
@@ -113,6 +111,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {!loading && leftIcon && <span className="shrink-0">{leftIcon}</span>}
         <span>{children}</span>
         {!loading && rightIcon && <span className="shrink-0">{rightIcon}</span>}
+      </>
+    );
+
+    // Si asChild es true, renderizar el children con las clases aplicadas
+    if (asChild) {
+      return children;
+    }
+
+    return (
+      <motion.button
+        ref={ref}
+        className={buttonClasses}
+        disabled={disabled || loading}
+        whileHover={{ scale: disabled || loading ? 1 : 1.02 }}
+        whileTap={{ scale: disabled || loading ? 1 : 0.98 }}
+        {...props}
+      >
+        {content}
       </motion.button>
     );
   }

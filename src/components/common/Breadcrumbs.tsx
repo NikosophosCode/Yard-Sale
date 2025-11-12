@@ -5,11 +5,13 @@ import { cn } from '@/utils/helpers';
 
 interface BreadcrumbItem {
   label: string;
-  path: string;
+  href?: string; // Para items personalizados
+  path?: string; // Para el sistema automático
 }
 
 export interface BreadcrumbsProps {
   className?: string;
+  items?: BreadcrumbItem[]; // Items personalizados opcionales
 }
 
 // Mapeo de rutas a labels personalizados
@@ -27,7 +29,7 @@ const routeLabels: Record<string, string> = {
   'recovery': 'Password Recovery',
 };
 
-export function Breadcrumbs({ className }: BreadcrumbsProps) {
+export function Breadcrumbs({ className, items: customItems }: BreadcrumbsProps) {
   const location = useLocation();
   
   // Generar breadcrumbs desde la ruta actual
@@ -65,7 +67,8 @@ export function Breadcrumbs({ className }: BreadcrumbsProps) {
     return breadcrumbs;
   };
 
-  const breadcrumbs = generateBreadcrumbs();
+  // Usar items personalizados si se proporcionan, si no generar automáticamente
+  const breadcrumbs = customItems || generateBreadcrumbs();
 
   // No renderizar si solo hay Home o si no hay breadcrumbs
   if (breadcrumbs.length <= 1) {
@@ -85,7 +88,7 @@ export function Breadcrumbs({ className }: BreadcrumbsProps) {
           const isLast = index === breadcrumbs.length - 1;
 
           return (
-            <li key={crumb.path} className="flex items-center">
+            <li key={crumb.path || crumb.href || index} className="flex items-center">
               {index > 0 && (
                 <ChevronRightIcon className="mx-2 h-4 w-4 text-neutral-400 dark:text-neutral-600" />
               )}
@@ -104,7 +107,7 @@ export function Breadcrumbs({ className }: BreadcrumbsProps) {
               ) : (
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
-                    to={crumb.path}
+                    to={crumb.path || crumb.href || '/'}
                     className="flex items-center text-neutral-600 transition-colors hover:text-brand-600 dark:text-neutral-400 dark:hover:text-brand-400"
                   >
                     {index === 0 ? (
