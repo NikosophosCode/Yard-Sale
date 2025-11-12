@@ -16,6 +16,7 @@ const OrderSuccess = lazy(() => import('@/pages').then((m) => ({ default: m.Orde
 const Orders = lazy(() => import('@/pages').then((m) => ({ default: m.Orders })));
 const Account = lazy(() => import('@/pages').then((m) => ({ default: m.Account })));
 const NotFound = lazy(() => import('@/pages').then((m) => ({ default: m.NotFound })));
+const CategoryPage = lazy(() => import('@/pages').then((m) => ({ default: m.CategoryPage })));
 
 // Componente de loading para Suspense
 function PageLoader() {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'category/:category',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <CategoryPage />
+          </Suspense>
+        ),
       },
       {
         path: 'product/:id',
