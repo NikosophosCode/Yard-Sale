@@ -35,7 +35,7 @@ export function Logo({ className, size = 'md' }: LogoProps) {
   return (
     <img
       src={logoSrc}
-      alt="Yard Sale"
+      alt="Great Sale"
       className={cn(
         'transition-opacity duration-200',
         sizeClasses[size],

@@ -1,6 +1,6 @@
 /**
  * API de Órdenes
- * Gestión de órdenes de compra para Yard Sale
+ * Gestión de órdenes de compra para Great Sale
  */
 
 import type { Order, OrderItem, Address, PaymentMethod, CartItem } from '@/types';

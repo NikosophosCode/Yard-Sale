@@ -1,4 +1,4 @@
-# 🎨 Integración con Printful - Yard Sale 2.0
+# 🎨 Integración con Printful - Great Sale 2.0
 
 ## 📋 Índice
 1. [¿Qué es Printful?](#qué-es-printful)
@@ -37,7 +37,7 @@
 
 ## 💡 ¿Por qué integrar Printful?
 
-### Ventajas para Yard Sale 2.0:
+### Ventajas para Great Sale 2.0:
 1. **Transformar tu marketplace**: De productos de segunda mano a una tienda híbrida
 2. **Nuevas categorías**: Agregar productos personalizados sin riesgo
 3. **Escalabilidad**: Vender productos sin límite de stock
@@ -808,7 +808,7 @@ app.listen(PORT, () => {
 #### [ ] Paso 8: Crear Store en Printful
 1. Dashboard > Stores
 2. "Add Store" > "Manual order platform / API"
-3. Nombrar tu tienda: "Yard Sale 2.0"
+3. Nombrar tu tienda: "Great Sale 2.0"
 4. Confirmar
 
 #### [ ] Paso 9: Obtener API Key
@@ -1042,4 +1042,4 @@ ngrok http 3001
 
 **Creado**: Octubre 2025  
 **Versión**: 1.0  
-**Proyecto**: Yard Sale 2.0
+**Proyecto**: Great Sale 2.0

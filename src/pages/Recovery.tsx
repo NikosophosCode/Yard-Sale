@@ -16,7 +16,7 @@ export function Recovery() {
           <Link to="/" className="inline-block">
             <img
               src="/assets/logos/logo_yard_sale.svg"
-              alt="Yard Sale"
+              alt="Great Sale"
               className="mx-auto h-12 w-auto"
             />
           </Link>

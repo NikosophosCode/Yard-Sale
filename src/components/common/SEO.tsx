@@ -11,8 +11,8 @@ export interface SEOProps {
 }
 
 const defaultSEO = {
-  siteName: 'Yard Sale',
-  defaultTitle: 'Yard Sale - Find Amazing Second-Hand Items',
+  siteName: 'Great Sale',
+  defaultTitle: 'Great Sale - Find Amazing Second-Hand Items',
   defaultDescription: 'Discover unique second-hand items at great prices. Shop from a wide selection of clothes, electronics, furniture, toys, and more.',
   defaultImage: '/assets/logos/logo_yard_sale.svg',
   url: 'https://yardsale.com',

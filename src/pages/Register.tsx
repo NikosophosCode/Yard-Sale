@@ -16,7 +16,7 @@ export function Register() {
           <Link to="/" className="inline-block">
             <img
               src="/assets/logos/logo_yard_sale.svg"
-              alt="Yard Sale"
+              alt="Great Sale"
               className="mx-auto h-12 w-auto"
             />
           </Link>
@@ -24,7 +24,7 @@ export function Register() {
             Crea tu cuenta
           </h1>
           <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-            Únete a Yard Sale y empieza a comprar
+            Únete a Great Sale y empieza a comprar
           </p>
         </div>
 
