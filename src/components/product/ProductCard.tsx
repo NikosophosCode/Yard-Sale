@@ -11,6 +11,7 @@ import { cn } from '@/utils/helpers';
 export interface ProductCardProps {
   product: Product;
   className?: string;
+  onAddToCart?: (product: Product) => void;
 }
 
 /**

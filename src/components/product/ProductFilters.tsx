@@ -7,11 +7,12 @@ import { cn } from '@/utils/helpers';
 
 export interface ProductFiltersProps {
   filters: Filters;
-  onCategoryChange: (category: Category) => void;
+  onCategoryChange?: (category: Category) => void;
   onSortChange: (sort: Filters['sortBy']) => void;
   onConditionChange: (condition: string) => void;
   onReset: () => void;
   className?: string;
+  hideCategory?: boolean;
 }
 
 const categories: { id: Category; name: string; emoji: string }[] = [
@@ -49,6 +50,7 @@ export function ProductFilters({
   onConditionChange,
   onReset,
   className,
+  hideCategory = false,
 }: ProductFiltersProps) {
   const hasActiveFilters =
     filters.category !== 'all' ||
@@ -86,41 +88,43 @@ export function ProductFilters({
       </div>
 
       {/* Categorías */}
-      <div className="mb-6">
-        <h3 className="mb-3 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-          Categorías
-        </h3>
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
-          {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => onCategoryChange(category.id)}
-              className={cn(
-                'flex flex-col items-center gap-1 rounded-xl border-2 p-3 transition-all',
-                filters.category === category.id
-                  ? 'border-brand-600 bg-brand-50 dark:border-brand-400 dark:bg-brand-900/20'
-                  : 'border-neutral-200 bg-white hover:border-brand-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-brand-600'
-              )}
-            >
-              <span className="text-2xl" aria-hidden="true">
-                {category.emoji}
-              </span>
-              <span
+      {!hideCategory && (
+        <div className="mb-6">
+          <h3 className="mb-3 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+            Categorías
+          </h3>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+            {categories.map((category) => (
+              <motion.button
+                key={category.id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onCategoryChange?.(category.id)}
                 className={cn(
-                  'text-xs font-medium',
+                  'flex flex-col items-center gap-1 rounded-xl border-2 p-3 transition-all',
                   filters.category === category.id
-                    ? 'text-brand-700 dark:text-brand-300'
-                    : 'text-neutral-600 dark:text-neutral-400'
+                    ? 'border-brand-600 bg-brand-50 dark:border-brand-400 dark:bg-brand-900/20'
+                    : 'border-neutral-200 bg-white hover:border-brand-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-brand-600'
                 )}
               >
-                {category.name}
-              </span>
-            </motion.button>
-          ))}
+                <span className="text-2xl" aria-hidden="true">
+                  {category.emoji}
+                </span>
+                <span
+                  className={cn(
+                    'text-xs font-medium',
+                    filters.category === category.id
+                      ? 'text-brand-700 dark:text-brand-300'
+                      : 'text-neutral-600 dark:text-neutral-400'
+                  )}
+                >
+                  {category.name}
+                </span>
+              </motion.button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Ordenar y Condición */}
       <div className="grid gap-4 sm:grid-cols-2">
