@@ -5,10 +5,11 @@ Aplicación moderna de e-commerce para productos de segunda mano, construida con
 ## ✨ Características Principales
 
 - 🛍️ **Catálogo de Productos**: 20+ productos con imágenes reales, categorías, y filtros avanzados
-- 🔍 **Búsqueda y Filtrado**: Búsqueda en tiempo real con debounce, filtros por categoría y condición
+- � **Páginas de Categorías**: Navegación dedicada por Clothes, Electronics, Furniture, Toys, y Others
+- �🔍 **Búsqueda y Filtrado**: Búsqueda en tiempo real con debounce, filtros por categoría y condición
 - 🛒 **Carrito Funcional**: Agregar/eliminar productos, actualizar cantidades, persistencia en localStorage
 - 🔐 **Autenticación Completa**: Registro, login, recuperación de contraseña, sesiones persistentes
-- � **Checkout**: Formulario completo con validación, métodos de pago, dirección de envío
+- 💳 **Checkout**: Formulario completo con validación, métodos de pago, dirección de envío
 - 📦 **Historial de Órdenes**: Ver órdenes pasadas con detalles completos
 - 🌓 **Modo Oscuro**: Tema claro/oscuro con persistencia y transiciones suaves
 - 📱 **Responsive**: Diseño mobile-first que funciona en todos los dispositivos
@@ -93,6 +94,18 @@ yard-sale-v2/
 │   ├── contexts/         # Context API providers
 │   ├── hooks/            # Custom React hooks
 │   ├── pages/            # Páginas/Vistas
+│   │   ├── Home.tsx      # Página principal
+│   │   ├── CategoryPage.tsx  # Páginas de categorías (dinámico)
+│   │   ├── ProductDetail.tsx # Detalle de producto
+│   │   ├── Cart.tsx      # Carrito de compras
+│   │   ├── Checkout.tsx  # Proceso de checkout
+│   │   ├── Orders.tsx    # Historial de órdenes
+│   │   ├── Account.tsx   # Cuenta de usuario
+│   │   ├── Login.tsx     # Inicio de sesión
+│   │   ├── Register.tsx  # Registro
+│   │   ├── Recovery.tsx  # Recuperación de contraseña
+│   │   ├── OrderSuccess.tsx  # Confirmación de orden
+│   │   └── NotFound.tsx  # Página 404
 │   ├── store/            # Zustand stores
 │   ├── types/            # TypeScript types
 │   ├── utils/            # Utilidades y helpers
@@ -187,6 +200,27 @@ npm run test -- --watch
 ## 📡 API Mock
 
 La aplicación usa JSON Server para simular un backend REST completo.
+
+### Rutas de la Aplicación
+
+#### Páginas Públicas
+- `/` - Home (todos los productos)
+- `/category/clothes` - Ropa y moda
+- `/category/electronics` - Electrónicos y gadgets
+- `/category/furniture` - Muebles para el hogar
+- `/category/toys` - Juguetes y juegos
+- `/category/others` - Otros productos
+- `/product/:id` - Detalle de producto
+- `/login` - Inicio de sesión
+- `/register` - Registro de usuario
+- `/recovery` - Recuperación de contraseña
+
+#### Páginas Privadas (requieren autenticación)
+- `/cart` - Carrito de compras
+- `/checkout` - Proceso de pago
+- `/orders` - Historial de órdenes
+- `/order-success/:id` - Confirmación de orden
+- `/account` - Cuenta de usuario
 
 ### Endpoints Disponibles
 
@@ -303,14 +337,15 @@ Ver `MIGRATION_PLAN.md` para detalles completos del plan de migración.
 
 ## 📊 Estadísticas del Proyecto
 
-- **Líneas de código**: ~8,000+ líneas
+- **Líneas de código**: ~8,500+ líneas
 - **Componentes**: 30+ componentes React
-- **Páginas**: 10 páginas completas
+- **Páginas**: 11 páginas completas (incluyendo categorías dinámicas)
 - **Contextos**: 3 (Auth, Theme, Toast)
 - **Stores**: 1 (Cart con Zustand)
 - **Hooks personalizados**: 7 hooks
 - **Tests**: 86+ tests unitarios
 - **Commits**: 50+ commits organizados
+- **Categorías**: 5 categorías de productos
 
 ## 🎯 Roadmap Futuro
 
