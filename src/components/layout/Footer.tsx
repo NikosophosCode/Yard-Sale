@@ -1,5 +1,5 @@
 import { cn } from '@/utils/helpers';
-
+import { Logo } from'@/components/common/';
 export interface FooterProps {
   /** Clase CSS adicional */
   className?: string;
@@ -94,7 +94,7 @@ export function Footer({ className }: FooterProps) {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <a href="/" className="flex items-center gap-2">
-              <img src="/assets/logos/logo_yard_sale.svg" alt="Yard Sale" className="h-32 w-32" />
+              <Logo size="lg" />
             </a>
             <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
               Your trusted marketplace for quality pre-owned items. Find great deals on everything

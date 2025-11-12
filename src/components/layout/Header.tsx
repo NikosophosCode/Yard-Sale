@@ -7,7 +7,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { ThemeToggle } from '@/components/common';
+import { ThemeToggle, Logo } from '@/components/common';
 import { useAuth } from '@/hooks/useAuth';
 import { useCart } from '@/hooks/useCart';
 import { cn } from '@/utils/helpers';
@@ -62,7 +62,7 @@ export function Header({ className }: HeaderProps) {
             href="/"
             className="text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 flex items-center gap-2 text-xl font-bold transition-colors"
           >
-            <img src="/assets/logos/logo_yard_sale.svg" alt="Yard Sale" className="h-24 w-24" />
+            <Logo size="md" />
           </a>
 
           {/* Navegación Desktop */}
